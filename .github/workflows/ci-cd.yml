@@ -36,7 +36,7 @@ jobs:
       matrix:
         node-version: ['12.x']
         appname: ['bxc-web-app']
-        deploy-group: ['staging']
+        deploy-group: ['web-app-staging']
         s3-bucket: ['aws-bxc-deployments']
         s3-filename: ['staging-aws-bxc-web-app-${{ github.sha }}']
 
