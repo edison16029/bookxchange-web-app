@@ -1,3 +1,5 @@
+![CI/CD](https://github.com/edison16029/bookxchange-web-app/workflows/CI/CD/badge.svg?branch=development)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
