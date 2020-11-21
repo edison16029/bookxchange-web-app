@@ -1,4 +1,4 @@
-![CI/CD](https://github.com/edison16029/bookxchange-web-app/workflows/CI/CD/badge.svg?branch=development)
+![CI/CD](https://github.com/edison16029/bookxchange-web-app/workflows/CI/CD/badge.svg?branch=master)
 
 # Getting Started with Create React App
 
