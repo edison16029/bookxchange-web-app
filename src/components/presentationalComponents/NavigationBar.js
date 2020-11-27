@@ -1,20 +1,13 @@
 import React from 'react'
-import { Nav, Navbar} from 'react-bootstrap';
+import { Nav, Navbar, NavItem} from 'react-bootstrap';
 import { withRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { appColours } from '../../shared/styles';
-
+import '../../styles/navigationbar.scss';
 const NavigationBarComponent = (props) => {
 
     const { location } = props;
-
-    const navbarStyle = {
-        backgroundColor : appColours.lighter_primary,
-    }
-
-    const brandItemStyle = {
-        color : appColours.white,
-    }
+    
 
     const navbarItemStyle = {
         color : appColours.white,
@@ -30,8 +23,8 @@ const NavigationBarComponent = (props) => {
     }
 
     return (
-        <Navbar collapseOnSelect expand="lg" style={navbarStyle}>
-            <Navbar.Brand href="/profile" style = {brandItemStyle} >BookXchange</Navbar.Brand>
+        <Navbar collapseOnSelect expand="lg" >
+            <Navbar.Brand href="/profile"> <div className="white-font">BookXchange</div></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
