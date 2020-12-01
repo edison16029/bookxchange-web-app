@@ -1,6 +1,7 @@
 import React from 'react'
 import Home from './Home'
-function Main() {
+
+const Main = () => {
     return(
        <React.Fragment>
            <Home />

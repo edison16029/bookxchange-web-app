@@ -5,19 +5,20 @@ import { BrowseBooks } from './BrowseBooks';
 import { MatchedBooks } from './MatchedBooks';
 import { Layout } from './presentationalComponents/Layout';
 import { NavigationBar} from './presentationalComponents/NavigationBar';
-
+import Login from './Login';
 const Home = () => {
+    //TODO : Add Error Component    
     return (
         <React.Fragment>
             <Router>
                 <NavigationBar />
                 <Layout>
-                    <Switch>
-                        <Route exact path="/"><Redirect to="/profile" /></Route>
+                    <Switch> 
+                        <Route exact path="/"><Redirect to="/signin" /></Route>
+                        <Route exact path="/signin" component = {Login} />
                         <Route exact path="/profile" component = {Profile} />
                         <Route exact path="/browsebooks" component = {BrowseBooks} />
                         <Route exact path="/matchedbooks" component = {MatchedBooks} />
-                        <Route component = {Profile} />
                     </Switch>
                 </Layout>
             </Router>

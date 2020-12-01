@@ -22,6 +22,9 @@ const NavigationBarComponent = (props) => {
         paddingLeft : 30,
     }
 
+    if(props.history.location.pathname==='/signin'){
+        return <div></div>;
+    }
     return (
         <Navbar collapseOnSelect expand="lg" >
             <Navbar.Brand href="/profile"> <div className="white-font">BookXchange</div></Navbar.Brand>
@@ -30,12 +33,12 @@ const NavigationBarComponent = (props) => {
                 <Nav className="mr-auto">
                 </Nav>
                 <Nav activeKey = {location.pathname} >
-                    <Nav.Link eventKey={1} as={NavLink} exact to="/profile" style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
-                        Profile
-                    </Nav.Link>
-                    <Nav.Link eventKey={2} as={NavLink} exact to="/browsebooks" style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
+                    <Nav.Link eventKey={1} as={NavLink} exact to="/browsebooks" style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
                         Browse Books
                     </Nav.Link>
+                    <Nav.Link eventKey={2} as={NavLink} exact to="/profile" style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
+                        Profile
+                    </Nav.Link>                    
                     <Nav.Link eventKey={3} as={NavLink} exact to="/matchedbooks" style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
                         Matched Books
                     </Nav.Link>
