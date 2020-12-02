@@ -23,7 +23,9 @@ const NavigationBarComponent = (props) => {
     }
 
     if(props.history.location.pathname==='/signin'){
-        return <div></div>;
+        return (
+            <div></div>
+        )
     }
     return (
         <Navbar collapseOnSelect expand="lg" >

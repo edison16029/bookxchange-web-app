@@ -1,11 +1,11 @@
 import React from 'react'
 import Home from './Home'
-
+import '../styles/main.scss';
 const Main = () => {
     return(
-       <React.Fragment>
-           <Home />
-       </React.Fragment>
+        <div class = "rootcontainer">
+            <Home />
+        </div>   
     )
 }
 

@@ -12,7 +12,6 @@ const Home = () => {
         <React.Fragment>
             <Router>
                 <NavigationBar />
-                <Layout>
                     <Switch> 
                         <Route exact path="/"><Redirect to="/signin" /></Route>
                         <Route exact path="/signin" component = {Login} />
@@ -20,7 +19,6 @@ const Home = () => {
                         <Route exact path="/browsebooks" component = {BrowseBooks} />
                         <Route exact path="/matchedbooks" component = {MatchedBooks} />
                     </Switch>
-                </Layout>
             </Router>
         </React.Fragment>
     )
