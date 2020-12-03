@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-do
 import { Profile } from './Profile';
 import { BrowseBooks } from './BrowseBooks';
 import { MatchedBooks } from './MatchedBooks';
-import { Layout } from './presentationalComponents/Layout';
 import { NavigationBar} from './presentationalComponents/NavigationBar';
 import Login from './Login';
 const Home = () => {

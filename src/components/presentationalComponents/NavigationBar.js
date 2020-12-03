@@ -1,5 +1,5 @@
 import React from 'react'
-import { Nav, Navbar, NavItem} from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import { withRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { appColours } from '../../shared/styles';

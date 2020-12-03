@@ -5,7 +5,6 @@ import Container from "react-bootstrap/Container";
 import '../styles/login.scss';
 import API from '../shared/api';
 import handleApiError from '../shared/errorhandler';
-import { withRouter } from "react-router-dom";
 const Login = (props) => {
 
     /* TODO : Automatically Redirect Logged in User
@@ -28,7 +27,7 @@ const Login = (props) => {
  
     const validateForm = () => email.length > 0;
 
-    const getButtonText = () => signinStage == SigninStage.SendOTP ? "Send OTP" : "Verify OTP";
+    const getButtonText = () => signinStage === SigninStage.SendOTP ? "Send OTP" : "Verify OTP";
         
     const sendOTP = () => {
         const requestBody = { 

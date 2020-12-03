@@ -4,7 +4,7 @@ const handleError = (error) => {
         console.log("Error : ",error.response.data);
     }
     else if( error.request) { // client never received a response, or request never left
-        alert("Error : " + "Bad Network/Server Failure. Try again later");
+        alert("Error : Bad Network/Server Failure. Try again later");
         console.log("Error : ",error.request);
     }
     else{ // other cases
