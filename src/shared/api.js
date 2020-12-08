@@ -9,10 +9,22 @@ class API {
 
     createUserEndpoint = () => {
         this.endpoints['users'] = {
+            signup : (requestBody) => {
+                var endpointUrl = this.url + "/users/signup";
+                return (
+                    //adding semicolon will throw error as it ends the statement without the promise returned.
+                    axios.post(endpointUrl, requestBody)
+                )
+            },
+            verifySignup : (requestBody) => {
+                var endpointUrl = this.url + "/users/signup/verify";
+                return (
+                    axios.post(endpointUrl, requestBody)
+                )
+            },
             login : (requestBody) => {
                 var endpointUrl = this.url + "/users/login";
                 return (
-                    //adding semicolon will throw error as it ends the statement without the promise returned.
                     axios.post(endpointUrl, requestBody)
                 )
             },
@@ -21,7 +33,6 @@ class API {
                 return (
                     axios.post(endpointUrl, requestBody)
                 )
-                
             }
         }
     }

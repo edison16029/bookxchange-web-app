@@ -2,41 +2,36 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import '../styles/login.scss';
+import '../styles/signup.scss';
 import API from '../shared/api';
 import handleApiError from '../shared/errorhandler';
-const Login = (props) => {
-
-    /* TODO : Automatically Redirect Logged in User
-    if(<condition></condition>){
-        return (
-            <Redirect to = "/browsebooks" />
-        )
-    }
-    */
+const Signup = (props) => {
 
     const SigninStage = {
         SendOTP : 0,
         VerifyOTP : 1
     }
+    const TAG = "[Signup.js] ";
+    const [username, setUserame] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [signinStage, setSigninStage] = useState(SigninStage.SendOTP);
  
-    const validateForm = () => email.length > 0;
+    const validateForm = () => email.length > 0 && username.length > 0;
 
     const getButtonText = () => signinStage === SigninStage.SendOTP ? "Send OTP" : "Verify OTP";
         
     const sendOTP = () => {
-        const requestBody = { 
+        const requestBody = {
+            "name" : username, 
             "email" : email
         }
-        console.log("Sending Request to generate OTP");
+        console.log(TAG,"Sending Request to generate OTP");
         const myApi = new API();
-        myApi.endpoints.users.login(requestBody)
+        myApi.endpoints.users.signup(requestBody)
             .then(response => {
                 alert("OTP has been sent to your Email Id successfully.");
-                console.log("Response for sendOTP : ",response.data);
+                console.log(TAG,"Response for sendOTP : ",response.data);
                 setSigninStage(SigninStage.VerifyOTP);
             })
             .catch(error => {
@@ -49,13 +44,13 @@ const Login = (props) => {
             "email" : email,
             "otp" : password
         }
-        console.log("Sending Request to verify OTP");
+        console.log(TAG,"Sending Request to verify OTP");
         const myApi = new API();
-        myApi.endpoints.users.verifyLogin(requestBody)
+        myApi.endpoints.users.verifySignup(requestBody)
             .then(response => {
-                console.log("Response for verifyOTP : ",response);
+                console.log(TAG,"Response for verifyOTP : ",response);
                 if(response.status === 200){
-                    console.log("Login Successful. Redirecting to Home Page");
+                    console.log("Signup Successful. Redirecting to Home Page");
                     props.history.push("/browsebooks");
                 }
                 else{
@@ -89,27 +84,35 @@ const Login = (props) => {
             <div className="Login">
                 <Container>
                     <Form onSubmit={handleSubmit}>
+                        <Form.Group size="lg" controlId="username">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                autoFocus
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUserame(e.target.value)}
+                            />
+                        </Form.Group>
                         <Form.Group size="lg" controlId="email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
-                                autoFocus
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group size="lg" controlId="password">
+                        <Form.Group size="lg" controlId="password" >
                             <Form.Label>OTP</Form.Label>
                             <Form.Control
-                                disabled = {signinStage === SigninStage.SendOTP}
+                                disabled = {signinStage === SigninStage.SendOTP} 
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </Form.Group>
-                        <div className = "signup-message-container">
-                            <p>New to BookXChange?&nbsp;</p>
-                            <a href="/signup"> Join Now</a>
+                        <div className = "signin-message-container">
+                            <p>Already a member?&nbsp;</p>
+                            <a href="/signin"> Sign In</a>
                         </div>
                         
                         <div className="button-container">
@@ -128,4 +131,4 @@ const Login = (props) => {
     );
 }
 
-export default Login;
+export default Signup;

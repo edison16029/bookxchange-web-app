@@ -22,7 +22,7 @@ const NavigationBarComponent = (props) => {
         paddingLeft : 30,
     }
 
-    if(props.history.location.pathname==='/signin'){
+    if(props.history.location.pathname==='/signin' || props.history.location.pathname==='/signup'){
         return (
             <div></div>
         )

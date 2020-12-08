@@ -5,6 +5,7 @@ import { BrowseBooks } from './BrowseBooks';
 import { MatchedBooks } from './MatchedBooks';
 import { NavigationBar} from './presentationalComponents/NavigationBar';
 import Login from './Login';
+import Signup from './Signup';
 const Home = () => {
     //TODO : Add Error Component    
     return (
@@ -14,6 +15,7 @@ const Home = () => {
                     <Switch> 
                         <Route exact path="/"><Redirect to="/signin" /></Route>
                         <Route exact path="/signin" component = {Login} />
+                        <Route exact path="/signup" component = {Signup} />
                         <Route exact path="/profile" component = {Profile} />
                         <Route exact path="/browsebooks" component = {BrowseBooks} />
                         <Route exact path="/matchedbooks" component = {MatchedBooks} />

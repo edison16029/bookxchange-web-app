@@ -3,7 +3,7 @@ import Home from './Home'
 import '../styles/main.scss';
 const Main = () => {
     return(
-        <div class = "rootcontainer">
+        <div className = "rootcontainer">
             <Home />
         </div>   
     )
