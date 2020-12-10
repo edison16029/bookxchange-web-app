@@ -5,6 +5,8 @@ import Container from "react-bootstrap/Container";
 import '../styles/signup.scss';
 import API from '../shared/api';
 import handleApiError from '../shared/errorhandler';
+import notifyUser from '../shared/Notification';
+
 const Signup = (props) => {
 
     const SigninStage = {
@@ -26,12 +28,10 @@ const Signup = (props) => {
             "name" : username, 
             "email" : email
         }
-        console.log(TAG,"Sending Request to generate OTP");
         const myApi = new API();
         myApi.endpoints.users.signup(requestBody)
             .then(response => {
-                alert("OTP has been sent to your Email Id successfully.");
-                console.log(TAG,"Response for sendOTP : ",response.data);
+                notifyUser("success", "OTP Sent", "OTP has been sent to your Email Id successfully.");
                 setSigninStage(SigninStage.VerifyOTP);
             })
             .catch(error => {
@@ -44,17 +44,14 @@ const Signup = (props) => {
             "email" : email,
             "otp" : otp
         }
-        console.log(TAG,"Sending Request to verify OTP");
         const myApi = new API();
         myApi.endpoints.users.verifySignup(requestBody)
             .then(response => {
-                console.log(TAG,"Response for verifyOTP : ",response);
                 if(response.status === 200){
-                    console.log("Signup Successful. Redirecting to Home Page");
                     props.history.push("/browsebooks");
                 }
                 else{
-                    alert("Error Occured while signing in. Try again."); //ideally, this should be unreachable.
+                    notifyUser("error", "Error", "Error Occured while signing in. Try again."); //ideally, this should be unreachable.
                 }
             })
             .catch(error => {
@@ -71,7 +68,7 @@ const Signup = (props) => {
             verifyOTP();
         }
         else{
-            alert("Invalid Submission"); //ideally, this should be unreachable.
+            notifyUser("error", "Error", "Invalid Submission."); //ideally, this should be unreachable.
         }
         
     }

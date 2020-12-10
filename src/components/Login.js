@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import '../styles/login.scss';
 import API from '../shared/api';
 import handleApiError from '../shared/errorhandler';
-import openNotification from './presentationalComponents/Notification';
+import notifyUser from '../shared/Notification';
 
 const Login = (props) => {
 
@@ -33,14 +33,10 @@ const Login = (props) => {
         const requestBody = { 
             "email" : email
         }
-        console.log("Sending Request to generate OTP");
         const myApi = new API();
         myApi.endpoints.users.login(requestBody)
             .then(response => {
-                alert("OTP has been sent to your Email Id successfully.");
-                openNotification();
-                console.log("Notification Should Have Been Opened");
-                console.log("Response for sendOTP : ",response.data);
+                notifyUser("success", "OTP Sent", "OTP has been sent to your Email Id successfully.");
                 setSigninStage(SigninStage.VerifyOTP);
             })
             .catch(error => {
@@ -53,17 +49,14 @@ const Login = (props) => {
             "email" : email,
             "otp" : otp
         }
-        console.log("Sending Request to verify OTP");
         const myApi = new API();
         myApi.endpoints.users.verifyLogin(requestBody)
             .then(response => {
-                console.log("Response for verifyOTP : ",response);
                 if(response.status === 200){
-                    console.log("Login Successful. Redirecting to Home Page");
                     props.history.push("/browsebooks");
                 }
                 else{
-                    alert("Error Occured while signing in. Try again."); //ideally, this should be unreachable.
+                    notifyUser("error", "Error", "Error Occured while signing in. Try again."); //ideally, this should be unreachable.
                 }
             })
             .catch(error => {
@@ -80,7 +73,7 @@ const Login = (props) => {
             verifyOTP();
         }
         else{
-            alert("Invalid Submission"); //ideally, this should be unreachable.
+            notifyUser("error", "Error", "Invalid Submission."); //ideally, this should be unreachable.
         }
         
     }
