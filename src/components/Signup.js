@@ -14,7 +14,7 @@ const Signup = (props) => {
     const TAG = "[Signup.js] ";
     const [username, setUserame] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [otp, setOTP] = useState("");
     const [signinStage, setSigninStage] = useState(SigninStage.SendOTP);
  
     const validateForm = () => email.length > 0 && username.length > 0;
@@ -42,7 +42,7 @@ const Signup = (props) => {
     const verifyOTP = () => {
         const requestBody = { 
             "email" : email,
-            "otp" : password
+            "otp" : otp
         }
         console.log(TAG,"Sending Request to verify OTP");
         const myApi = new API();
@@ -101,13 +101,13 @@ const Signup = (props) => {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group size="lg" controlId="password" >
+                        <Form.Group size="lg" controlId="otp" >
                             <Form.Label>OTP</Form.Label>
                             <Form.Control
                                 disabled = {signinStage === SigninStage.SendOTP} 
                                 type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={otp}
+                                onChange={(e) => setOTP(e.target.value)}
                             />
                         </Form.Group>
                         <div className = "signin-message-container">

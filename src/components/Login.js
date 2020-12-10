@@ -5,6 +5,8 @@ import Container from "react-bootstrap/Container";
 import '../styles/login.scss';
 import API from '../shared/api';
 import handleApiError from '../shared/errorhandler';
+import openNotification from './presentationalComponents/Notification';
+
 const Login = (props) => {
 
     /* TODO : Automatically Redirect Logged in User
@@ -20,7 +22,7 @@ const Login = (props) => {
         VerifyOTP : 1
     }
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [otp, setOTP] = useState("");
     const [signinStage, setSigninStage] = useState(SigninStage.SendOTP);
  
     const validateForm = () => email.length > 0;
@@ -36,6 +38,8 @@ const Login = (props) => {
         myApi.endpoints.users.login(requestBody)
             .then(response => {
                 alert("OTP has been sent to your Email Id successfully.");
+                openNotification();
+                console.log("Notification Should Have Been Opened");
                 console.log("Response for sendOTP : ",response.data);
                 setSigninStage(SigninStage.VerifyOTP);
             })
@@ -47,7 +51,7 @@ const Login = (props) => {
     const verifyOTP = () => {
         const requestBody = { 
             "email" : email,
-            "otp" : password
+            "otp" : otp
         }
         console.log("Sending Request to verify OTP");
         const myApi = new API();
@@ -98,13 +102,13 @@ const Login = (props) => {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group size="lg" controlId="password">
+                        <Form.Group size="lg" controlId="otp">
                             <Form.Label>OTP</Form.Label>
                             <Form.Control
                                 disabled = {signinStage === SigninStage.SendOTP}
                                 type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={otp}
+                                onChange={(e) => setOTP(e.target.value)}
                             />
                         </Form.Group>
                         <div className = "signup-message-container">
