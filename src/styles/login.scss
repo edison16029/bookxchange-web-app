@@ -1,0 +1,54 @@
+@import "colors";
+
+
+@media all {
+
+  .login-root-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+    
+  .logo-container {
+    text-align: center;
+    font-size: xx-large;
+    flex : 1;
+    padding: 3%;
+  }
+
+  .Login {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    flex : 9;
+  }
+  
+  .Login form {
+    background-color: $lighter_primary;
+    margin: 0 auto;
+    flex : 1;
+    padding: 40px 60px;
+    
+    max-width: 420px;
+  }
+
+  .Login .login-button {
+    background-color: $secondary;
+    color : $black;
+    border: 0px;
+  }
+
+  .button-container {
+    padding : 50px 40px;
+  }
+
+  .signup-message-container {
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+  }
+  
+}

@@ -3,23 +3,23 @@ import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-do
 import { Profile } from './Profile';
 import { BrowseBooks } from './BrowseBooks';
 import { MatchedBooks } from './MatchedBooks';
-import { Layout } from './presentationalComponents/Layout';
 import { NavigationBar} from './presentationalComponents/NavigationBar';
-
+import Login from './Login';
+import Signup from './Signup';
 const Home = () => {
+    //TODO : Add Error Component    
     return (
         <React.Fragment>
             <Router>
                 <NavigationBar />
-                <Layout>
-                    <Switch>
-                        <Route exact path="/"><Redirect to="/profile" /></Route>
+                    <Switch> 
+                        <Route exact path="/"><Redirect to="/signin" /></Route>
+                        <Route exact path="/signin" component = {Login} />
+                        <Route exact path="/signup" component = {Signup} />
                         <Route exact path="/profile" component = {Profile} />
                         <Route exact path="/browsebooks" component = {BrowseBooks} />
                         <Route exact path="/matchedbooks" component = {MatchedBooks} />
-                        <Route component = {Profile} />
                     </Switch>
-                </Layout>
             </Router>
         </React.Fragment>
     )
