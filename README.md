@@ -1,5 +1,5 @@
-![build](https://github.com/edison16029/bookxchange-web-app/workflows/CI/badge.svg)
-![aws deploy](https://github.com/edison16029/bookxchange-web-app/workflows/CD/badge.svg)
+![build](https://github.com/edison16029/bookxchange-web-app/workflows/build/badge.svg)
+![aws-deploy](https://github.com/edison16029/bookxchange-web-app/workflows/aws-deploy/badge.svg)
 
 # BookXchange Web App
 
