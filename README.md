@@ -1,4 +1,5 @@
-![CI/CD](https://github.com/edison16029/bookxchange-web-app/workflows/CI/CD/badge.svg?branch=master)
+![CI](https://github.com/edison16029/bookxchange-web-app/workflows/CI/badge.svg)
+![CD](https://github.com/edison16029/bookxchange-web-app/workflows/CD/badge.svg)
 
 # BookXchange Web App
 
