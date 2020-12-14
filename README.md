@@ -1,21 +1,25 @@
 ![CI/CD](https://github.com/edison16029/bookxchange-web-app/workflows/CI/CD/badge.svg?branch=master)
 
-# BookXchange 
-A Web Application which lets the users share their owned books and browse through the books owned by the people in the neighbourhood.
-This Web-App is developed using React based Front-End and [NodeJs Backend](https://github.com/shreyas-sriram/bookxchange-server).
+# BookXchange Web App
+
+This repository contains the front-end components of the BookXchange Web Application, developed on Reactjs.
+
+BookXchange is a web application which lets the users share their owned books and browse through the books owned by the people in the neighbourhood.
+
+The back-end components for this application can be found [here](https://github.com/shreyas-sriram/bookxchange-server).
 
 ## Commands
-
-Clone the repository
-```
-git clone https://github.com/edison16029/bookxchange-web-app.git
-```
 
 Install the dependencies
 ```
 npm install
 ```
 > Note: We use npm as the prefered package manager.
+
+Build the Web Application
+```
+npm build
+```
 
 Run the client side application
 ```
@@ -30,10 +34,6 @@ Run tests
 npm test
 ```
 
-Build the Web Application
-```
-npm build
-```
 
 ## API Documentation
 
