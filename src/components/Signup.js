@@ -13,7 +13,6 @@ const Signup = (props) => {
         SendOTP : 0,
         VerifyOTP : 1
     }
-    const TAG = "[Signup.js] ";
     const [username, setUserame] = useState("");
     const [email, setEmail] = useState("");
     const [otp, setOTP] = useState("");
