@@ -1,12 +1,18 @@
 name: aws-deploy
 
-on: push
+on:
+  workflow_run:
+    workflows:
+      - build
+    branches: [master]
+    types: 
+      - completed
 
 jobs:
   deploy:
     name: CD Pipeline
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
         node-version: ['12.x']
