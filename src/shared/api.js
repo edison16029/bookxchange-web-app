@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+axios.defaults.withCredentials = true
+
 class API {
     constructor() {
         this.url = "http://localhost:3000/api/v1";
@@ -9,26 +11,26 @@ class API {
 
     createUserEndpoint = () => {
         this.endpoints['users'] = {
-            signup : (requestBody) => {
+            signup: (requestBody) => {
                 var endpointUrl = this.url + "/users/signup";
                 return (
                     //adding semicolon will throw error as it ends the statement without the promise returned.
                     axios.post(endpointUrl, requestBody)
                 )
             },
-            verifySignup : (requestBody) => {
+            verifySignup: (requestBody) => {
                 var endpointUrl = this.url + "/users/signup/verify";
                 return (
                     axios.post(endpointUrl, requestBody)
                 )
             },
-            login : (requestBody) => {
+            login: (requestBody) => {
                 var endpointUrl = this.url + "/users/login";
                 return (
                     axios.post(endpointUrl, requestBody)
                 )
             },
-            verifyLogin : (requestBody) => {
+            verifyLogin: (requestBody) => {
                 var endpointUrl = this.url + "/users/login/verify";
                 return (
                     axios.post(endpointUrl, requestBody)
