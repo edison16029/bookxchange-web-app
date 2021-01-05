@@ -6,6 +6,8 @@ import { MatchedBooks } from './MatchedBooks';
 import { NavigationBar} from './presentationalComponents/NavigationBar';
 import Login from './Login';
 import Signup from './Signup';
+import constants from '../shared/constants';
+
 const Home = () => {
     //TODO : Add Error Component    
     return (
@@ -13,12 +15,12 @@ const Home = () => {
             <Router>
                 <NavigationBar />
                     <Switch> 
-                        <Route exact path="/"><Redirect to="/signin" /></Route>
-                        <Route exact path="/signin" component = {Login} />
-                        <Route exact path="/signup" component = {Signup} />
-                        <Route exact path="/profile" component = {Profile} />
-                        <Route exact path="/browsebooks" component = {BrowseBooks} />
-                        <Route exact path="/matchedbooks" component = {MatchedBooks} />
+                        <Route exact path="/"><Redirect to={constants.routes.signin}/></Route>
+                        <Route exact path={constants.routes.signin} component = {Login} />
+                        <Route exact path={constants.routes.signup} component = {Signup} />
+                        <Route exact path={constants.routes.profile} component = {Profile} />
+                        <Route exact path={constants.routes.browseBooks} component = {BrowseBooks} />
+                        <Route exact path={constants.routes.matchedBooks} component = {MatchedBooks} />
                     </Switch>
             </Router>
         </React.Fragment>
