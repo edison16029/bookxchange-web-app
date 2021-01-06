@@ -1,0 +1,11 @@
+@import "colors";
+
+@media all {
+    .switch-container {
+        background-color: $primary;
+        flex: 11;
+        display: flex;
+        justify-content: center;
+    }
+  
+}

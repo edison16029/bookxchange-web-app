@@ -9,7 +9,6 @@ const NavigationBarComponent = (props) => {
 
     const { location } = props;
     
-
     const navbarItemStyle = {
         color : appColours.white,
         paddingRight : 30,
@@ -29,25 +28,27 @@ const NavigationBarComponent = (props) => {
         )
     }
     return (
-        <Navbar collapseOnSelect expand="lg" >
-            <Navbar.Brand href={constants.routes.home}> <div className="white-font">BookXchange</div></Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="mr-auto">
-                </Nav>
-                <Nav activeKey = {location.pathname} >
-                    <Nav.Link eventKey={1} as={NavLink} exact to={constants.routes.browseBooks} style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
-                        Browse Books
-                    </Nav.Link>
-                    <Nav.Link eventKey={2} as={NavLink} exact to={constants.routes.profile} style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
-                        Profile
-                    </Nav.Link>                    
-                    <Nav.Link eventKey={3} as={NavLink} exact to={constants.routes.matchedBooks} style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
-                        Matched Books
-                    </Nav.Link>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
+        <div className = "navbar-container">
+            <Navbar collapseOnSelect expand="lg" >
+                <Navbar.Brand href={constants.routes.home}> <div className="white-font">BookXchange</div></Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="mr-auto">
+                    </Nav>
+                    <Nav activeKey = {location.pathname} >
+                        <Nav.Link eventKey={1} as={NavLink} exact to={constants.routes.browseBooks} style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
+                            Browse Books
+                        </Nav.Link>
+                        <Nav.Link eventKey={2} as={NavLink} exact to={constants.routes.profile} style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
+                            Profile
+                        </Nav.Link>                    
+                        <Nav.Link eventKey={3} as={NavLink} exact to={constants.routes.matchedBooks} style = {navbarItemStyle} activeStyle={navbarActiveItemStyle}>
+                            Matched Books
+                        </Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        </div>
     )
 }
 
