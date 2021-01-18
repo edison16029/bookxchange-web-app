@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import { Layout } from './presentationalComponents/Layout';
 import Button from './presentationalComponents/Button';
 import '../styles/profile.scss';
+import AccountTab from './AccountTab';
+import { fetchMyAccountData } from '../redux/myAccountSlice'
+import { connect } from 'react-redux'
+
 
 const pageConstants = {
     activeClassName : "tab-button-active",
@@ -10,8 +14,10 @@ const pageConstants = {
     myBooksTabActive : "my-books-active"
 } 
 
-export const Profile = () => {
+const mapDispatchToProps = { fetchMyAccountData}
+const Profile = ({fetchMyAccountData}) => {
 
+    fetchMyAccountData();
     const [accountButtonClassName, setAccountButtonClassName] = useState(pageConstants.activeClassName);
     const [myBooksButtonClassName, setMyBooksAccountButtonClassName] = useState(pageConstants.inactiveClassName);
     const [initallyActive, setInitallyActive] = useState(" initially-active");
@@ -32,7 +38,7 @@ export const Profile = () => {
     }
 
     const AccountTabBody = () => (
-        <div>Hello  Account</div>
+        <AccountTab />
     )
 
     const MyBooksTabBody = () => (
@@ -59,3 +65,5 @@ export const Profile = () => {
         </Layout>
     )
 }
+
+export default connect(null, mapDispatchToProps)(Profile)
