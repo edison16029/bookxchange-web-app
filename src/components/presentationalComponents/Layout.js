@@ -1,10 +1,13 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container';
+
+import '../../styles/layout.scss';
 
 export const Layout = (props) => {
     return (
-        <Container>
-            {props.children}
-        </Container>
+        <div className = "layout-container">
+            <div className = "layout-inner-container">
+                {props.children}
+            </div>
+        </div>
     )
 }

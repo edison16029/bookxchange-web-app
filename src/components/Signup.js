@@ -6,6 +6,7 @@ import '../styles/signup.scss';
 import API from '../shared/api';
 import handleApiError from '../shared/errorhandler';
 import notifyUser from '../shared/Notification';
+import constants from '../shared/constants';
 
 const Signup = (props) => {
 
@@ -47,7 +48,7 @@ const Signup = (props) => {
         myApi.endpoints.users.verifySignup(requestBody)
             .then(response => {
                 if(response.status === 200){
-                    props.history.push("/browsebooks");
+                    props.history.push(constants.routes.home);
                 }
                 else{
                     notifyUser("error", "Error", "Error Occured while signing in. Try again."); //ideally, this should be unreachable.
@@ -108,7 +109,7 @@ const Signup = (props) => {
                         </Form.Group>
                         <div className = "signin-message-container">
                             <p>Already a member?&nbsp;</p>
-                            <a href="/signin"> Sign In</a>
+                            <a href={constants.routes.signin}> Sign In</a>
                         </div>
                         
                         <div className="button-container">

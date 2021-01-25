@@ -1,7 +1,12 @@
 @import "colors";
 
+.navbar-container {
+    flex : 1
+}
+
 .navbar {
     background-color:  $lighter_primary;
+    height: 100%;
 }
 
 .white-font {

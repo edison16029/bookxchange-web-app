@@ -35,6 +35,12 @@ class API {
                 return (
                     axios.post(endpointUrl, requestBody)
                 )
+            },
+            fetchMyUser: () => {
+                var endpointUrl = this.url + "/users/me";
+                return (
+                    axios.get(endpointUrl, {})
+                )
             }
         }
     }

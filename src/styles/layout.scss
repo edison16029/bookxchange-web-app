@@ -1,0 +1,17 @@
+@import "colors";
+ 
+@media all {
+    .layout-container {
+        height: 100%;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .layout-inner-container {
+        height: 90%;
+        width: 100%;
+    }
+  
+}
