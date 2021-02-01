@@ -1,10 +1,91 @@
 @import "colors";
+@import "fonts";
 
 @media all {
     .bookview-container {
-        background-color: $white;
-        height: 500px;
-        width: 500px;
+        height: 85%;
     }
-  
+
+    .bookbg {
+        height: 100%;
+        width: 100%;
+        background-image : url(book.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .top-container{
+        flex: 13;
+    }
+
+    .bottom-container{
+        flex: 13;
+        display: flex;
+    }
+
+    .bookname-container{
+        flex: 8;
+        display: flex;
+        // background-color: red;
+    }
+
+    .author-container{
+        flex: 6;
+        display: flex;
+        // background-color: green;
+    }
+
+    .owner-container{
+        flex: 6;
+        display: flex;
+        // background-color: grey;
+    }
+
+    .left-container{
+        flex : 2.4;
+    }
+
+    .mid-container{
+        flex : 8;
+    }
+
+    a, a:focus, a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    //The commented css are used in button
+    // .abutton {
+    //     background: grey;
+    //     border: 0;
+    //     border-radius: 50%;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     padding: 0; 
+    //   }
+      
+    // .abutton::after {
+    //     content: "";
+    //     display: block;
+    //     padding-bottom: 100%;
+    // }
+
+    // .temp-bg {
+    //     background-color: honeydew;
+    // }
+
+    // .button-container {
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: flex-start;
+    //     align-items: flex-start;
+    // }
+
+    // .inner-button-container {
+    //     background-color: green;
+    //     height: 90px;
+    //     width: 90px;
+    // }
+
 }

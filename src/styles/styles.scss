@@ -1,0 +1,44 @@
+@import "colors";
+@import "fonts";
+
+@media all {
+
+    .padding-horizontal-medium {
+        padding-right: 2%;
+        padding-left: 2%;
+    }
+
+    .padding-horizontal-large {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .text-align-left {
+        text-align: left;
+    }
+
+    .text-align-center {
+        text-align: center;
+    }
+
+    .text-align-right {
+        text-align: right;
+    }
+
+    .big-font {
+        font-size: $big-font;
+    }
+
+    .medium-font {
+        font-size: $medium-font;
+    }
+
+    .font-color-secondary {
+        color: $secondary;
+    }
+
+    .flex-column {
+        display: flex;
+        flex-direction: column;
+    }
+}
