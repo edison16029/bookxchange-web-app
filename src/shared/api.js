@@ -49,6 +49,12 @@ class API {
                 return (
                     axios.get(endpointUrl, {})
                 )
+            },
+            likeBook: (id) => {
+                var endpointUrl = this.url + "/books/" + id + "/like";
+                return (
+                    axios.put(endpointUrl, {})
+                )
             }
         }
     }

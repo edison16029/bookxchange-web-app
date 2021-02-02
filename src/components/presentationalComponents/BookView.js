@@ -3,7 +3,7 @@ import '../../styles/styles.scss';
 import '../../styles/bookview.scss';
 
 const BookView = (props) => {
-    let book = props.book;
+    const {book, onClick } = props;
     return (
         <div className = "bookview-container">
             <div className = "bookbg flex-column">
@@ -31,18 +31,12 @@ const BookView = (props) => {
                     </div>
                 </div>
                 <div className = "bottom-container">
-                    {/* Add Button Code here*/}
-                    {/* <div className = "left-container" />
-                    <div className = "mid-container temp-bg padding-horizontal-large button-container">
-                        <div className = "inner-button-container">
-                            <button>Interested</button>
-                            asd
+                    <div className = "left-container" />
+                    <div className = "mid-container padding-horizontal-large interested-button-container">
+                        <div className = "interested-button-container-parent margin-top-medium">
+                            <div className = "interested-button-container-child"><button className = "font-color-black font-bold" onClick = { () => {onClick(book.id)}} >Like</button></div>
                         </div>
-                        <div className = "extra-button-container">
-                            <button>Interested</button>
-                            sda
-                        </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
 

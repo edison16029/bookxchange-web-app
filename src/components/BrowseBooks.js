@@ -4,6 +4,10 @@ import { Layout } from './presentationalComponents/Layout';
 import { fetchBooks } from '../redux/booksSlice'
 import { connect } from 'react-redux'
 import { Pagination } from 'antd';
+import API from '../shared/api';
+import handleApiError from '../shared/errorhandler';
+import notifyUser from '../shared/Notification';
+
 import '../styles/browsebooks.scss';
 
 const mapDispatchToProps = { fetchBooks }
@@ -22,6 +26,17 @@ const BrowseBooks = ({fetchBooks, books}) => {
     const onPageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
+
+    const onBookLikeClick = (bookId) => {
+        const myApi = new API();
+        return myApi.endpoints.books.likeBook(bookId)
+        .then(response => {
+            notifyUser("success", "Book Liked", response.data.message);
+        })
+        .catch(error => {
+            handleApiError(error);         
+        });
+    }
     if(!books || !books.data || !books.data.nearbyBooks) return null; //Add Error Page
 
     let numberOfBooksPerPage = 4;
@@ -30,7 +45,7 @@ const BrowseBooks = ({fetchBooks, books}) => {
         .map(book => {
             return (
                 <div className = "book-container" key = {book.id}>
-                        <BookView book = {book}/>
+                        <BookView book = {book} onClick = {onBookLikeClick}/>
                 </div>
             )
         })
