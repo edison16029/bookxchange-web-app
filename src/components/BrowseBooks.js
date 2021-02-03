@@ -17,7 +17,6 @@ const mapStateToProps = state => ({
 });
 const BrowseBooks = ({fetchBooks, books}) => {
     useEffect(() => {
-        console.group();
         fetchBooks();
     }, [])
 
