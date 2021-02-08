@@ -1,7 +1,7 @@
-import React from "react";
+import React,{ useState } from "react";
 import { connect } from "react-redux";
-import { List} from "antd";
-import "../styles/accounttab.scss"
+import { List,Modal,Button} from "antd";
+import "../styles/matchedbooks.scss"
 const data = [
   {
     title: "Ant Design Title 1",
@@ -22,17 +22,31 @@ const mapStateToProps = (state) => ({
 });
 
 const MatchedBooksTab = ({ myAccount }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   return (
     <div className="accounttab-container">
           <List
+          size="large"
             itemLayout="horizontal"
             dataSource={data}
             renderItem={(item) => (
               <List.Item>
-                <List.Item.Meta
-                  title={<a href="https://ant.design">{item.title}</a>}
-                  description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                />
+                <Button type="link" block onClick={showModal}>{item.title}</Button>
+                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
               </List.Item>
             )}
           />

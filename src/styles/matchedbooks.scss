@@ -57,6 +57,7 @@
   }
   .ant-dropdown-menu {
     background-color: $secondary;
+    text-align: center;
   }
   .ant-dropdown-menu-item,
   .ant-dropdown-menu-submenu-title {
@@ -67,5 +68,36 @@
     color: $secondary;
     font-size: 18px;
     background-color: $lightest_primary;
+    line-height: 30px;
+  }
+  .ant-dropdown {
+    align-items: center;
+  }
+  .ant-list-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 12px 0;
+    color: $white;
+    background-color:$primary;
+    font-size: 30px;
+  }
+
+  .ant-list {
+    margin: 40px;
+    padding: 30px;
+    text-align: center;
+  }
+  .ant-list-split .ant-list-item {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .ant-list-lg .ant-list-item {
+    padding: 20px 24px;
   }
 }
