@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Layout } from './presentationalComponents/Layout';
 import Button from './presentationalComponents/Button';
-import '../styles/profile.scss';
+import '../styles/matchedbooks.scss';
 import { Menu, Dropdown } from 'antd';
 import { BellFilled  } from '@ant-design/icons';
 import { fetchMyAccountData } from '../redux/myAccountSlice'
@@ -37,6 +37,7 @@ const MatchedBooks = ({fetchMyAccountData}) => {
 
     const menu = (
         <Menu>
+            <Menu.ItemGroup title="Mark as Read">
           <Menu.Item>
             <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
               1st menu item
@@ -52,7 +53,7 @@ const MatchedBooks = ({fetchMyAccountData}) => {
               3rd menu item
             </a>
           </Menu.Item>
-          <Menu.Item danger>a danger item</Menu.Item>
+          </Menu.ItemGroup>
         </Menu>
       );
 
@@ -79,7 +80,7 @@ const MatchedBooks = ({fetchMyAccountData}) => {
 
     return (
         <Layout>
-                    <Dropdown overlay={menu} overlayStyle="notification-body">
+                    <Dropdown overlay={menu}>
     <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
     <BellFilled className="notification" />
     </a>
