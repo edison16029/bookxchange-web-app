@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import API from '../shared/api';
 import handleApiError from '../shared/errorhandler';
 
-export const fetchMyAccountData = createAsyncThunk(
-    'myAccount/fetchMyAccountData',
+export const fetchBooks = createAsyncThunk(
+    'books/fetchBooks',
     (data, ThunkAPI) => {
         const myApi = new API();
-        return myApi.endpoints.users.fetchMyUser()
+        return myApi.endpoints.books.fetchNearbyBooks()
         .then(response => {
             return response.data;
         })
@@ -16,25 +16,23 @@ export const fetchMyAccountData = createAsyncThunk(
         });  
     }
   )
-const myAccountSlice = createSlice({
-  name: 'myAccount',
+
+const booksSlice = createSlice({
+  name: 'books',
   initialState: { 
         data : {},
         error : false,
         status : "initial"
   },
   reducers: {
-        addMyAccountData(state, action) {
-            state.data = action.payload;
-        }
     },
     extraReducers : {
-        [fetchMyAccountData.fulfilled] : (state, action) => {
-            state.data = action.payload.data;
+        [fetchBooks.fulfilled] : (state, action) => {
+            state.data.nearbyBooks = action.payload.data.nearbyBooks;
             state.error = false;
             state.status = "fetched";
         },
-        [fetchMyAccountData.rejected] : (state, action) => {
+        [fetchBooks.rejected] : (state, action) => {
             state.data = {};
             state.error = true;
             state.status = "fetched";
@@ -42,5 +40,4 @@ const myAccountSlice = createSlice({
     }
 })
 
-export const { addMyAccountData } = myAccountSlice.actions
-export default myAccountSlice.reducer
+export default booksSlice.reducer

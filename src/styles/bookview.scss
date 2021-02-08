@@ -1,0 +1,90 @@
+@import "colors";
+@import "fonts";
+
+@media all {
+    .bookview-container {
+        height: 85%;
+    }
+
+    .bookbg {
+        height: 100%;
+        width: 100%;
+        background-image : url(book.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .top-container{
+        flex: 13;
+    }
+
+    .bottom-container{
+        flex: 13;
+        display: flex;
+    }
+
+    .bookname-container{
+        flex: 8;
+        display: flex;
+    }
+
+    .author-container{
+        flex: 6;
+        display: flex;
+    }
+
+    .owner-container{
+        flex: 6;
+        display: flex;
+    }
+
+    .left-container{
+        flex : 2.4;
+    }
+
+    .mid-container{
+        flex : 8;
+    }
+
+    a, a:focus, a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .temp-bg {
+        background-color: honeydew;
+    }
+
+    .interested-button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .interested-button-container-parent {
+        background-color: $secondary;
+        width: 4vw;
+        height: 4vw;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .interested-button-container-child {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .interested-button-container button {
+        background: none;
+        color: $black;
+        border: none;
+        padding: 0;
+        font: bold;
+        cursor: pointer;
+        outline: inherit
+    }
+
+}
