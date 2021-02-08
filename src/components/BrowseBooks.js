@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
     books : state.books
 });
 const BrowseBooks = ({fetchBooks, books}) => {
-    useEffect(fetchBooks, []);
+    useEffect(fetchBooks, [fetchBooks]);
 
     const [currentPage, setCurrentPage] = useState(1);
 
