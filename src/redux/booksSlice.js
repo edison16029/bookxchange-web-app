@@ -40,5 +40,4 @@ const booksSlice = createSlice({
     }
 })
 
-export const { } = booksSlice.actions
 export default booksSlice.reducer

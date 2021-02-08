@@ -13,7 +13,7 @@ const BookView = (props) => {
                     {/*Left Container fills the left part of Book Icon with empty space*/}
                     <div className = "left-container" />
                     <div className = "mid-container text-align-center padding-horizontal-medium">
-                        <span className = "big-font"><a href={book.link} target="_blank">{book.name}</a></span>
+                        <span className = "big-font"><a href={book.link} target="_blank" rel="noopener noreferrer">{book.name}</a></span>
                     </div>
                 </div>
                 <div className = "author-container">
