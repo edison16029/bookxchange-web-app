@@ -8,6 +8,12 @@
     display: flex;
     flex-direction: column;
   }
+  .accounttab-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+}
 
   .tab-bar {
     background-color: $lighter_primary;
@@ -55,6 +61,9 @@
     color: $secondary;
     margin: 10px;
   }
+  .notification-container {
+  text-align:end;
+  }
   .ant-dropdown-menu {
     background-color: $secondary;
     text-align: center;
@@ -78,14 +87,14 @@
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     padding: 12px 0;
     color: $white;
-    background-color:$primary;
+    background-color: $primary;
     font-size: 30px;
   }
 
@@ -100,4 +109,60 @@
   .ant-list-lg .ant-list-item {
     padding: 20px 24px;
   }
+  .ant-modal {
+    color: $white;
+  }
+  .ant-modal-header {
+    background: $lightest_primary;
+    border-bottom: 0px;
+  }
+  .ant-modal-title {
+    color: $white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 24px;
+  }
+  .modal-container{
+    height: max-content;
+  }
+  .ant-modal-content {
+    background-color: $lightest_primary;
+  }
+  .ant-modal-footer {
+    text-align: center;
+    border-top: 0px;
+  }
+  .ant-modal-close {
+    color:$white;
+  }
+  .ant-btn-primary {
+    color:$black;
+    background: $secondary;
+    border-color: $secondary;
+  }
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  color:$black;
+  background: #ccac00;
+  border-color: #ccac00;
+}
+.ant-btn-link {
+  color: $white;
+  background: transparent;
+}
+.ant-btn-link:hover,
+.ant-btn-link:focus {
+  color: $white;
+  background: transparent;
+}
+.ant-typography {
+  color: $white;
+  overflow-wrap: break-word;
+}
+h2.ant-typography,
+.ant-typography h2 {
+  color: $white;
+  text-align: center;
+  margin-bottom: 0;
+}
 }

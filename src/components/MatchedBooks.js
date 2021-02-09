@@ -87,11 +87,14 @@ const MatchedBooks = ({ fetchMyAccountData }) => {
 
   return (
     <Layout>
-      <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-          <BellFilled className="notification" />
-        </a>
-      </Dropdown>
+      <div className="notification-container">
+        <Dropdown overlay={menu}>
+          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+            <BellFilled className="notification" />
+          </a>
+        </Dropdown>
+      </div>
+
       <div className="profile-root-container">
         <div className="tab-bar">
           <Button

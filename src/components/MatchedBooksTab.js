@@ -1,7 +1,8 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { List,Modal,Button} from "antd";
-import "../styles/matchedbooks.scss"
+import { List, Modal, Button,Typography } from "antd";
+import "../styles/matchedbooks.scss";
+const { Title } = Typography;
 const data = [
   {
     title: "Ant Design Title 1",
@@ -35,22 +36,50 @@ const MatchedBooksTab = ({ myAccount }) => {
   };
   return (
     <div className="accounttab-container">
-          <List
-          size="large"
-            itemLayout="horizontal"
-            dataSource={data}
-            renderItem={(item) => (
-              <List.Item>
-                <Button type="link" block onClick={showModal}>{item.title}</Button>
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Modal>
-              </List.Item>
-            )}
-          />
-      </div>
+       <Title level={2}>Books you are interested in</Title>
+      <List
+        size="large"
+        itemLayout="horizontal"
+        dataSource={data}
+        renderItem={(item) => (
+          <List.Item>
+            <Button type="link" block onClick={showModal}>
+              {item.title}
+            </Button>
+            <Modal
+              title="Basic Modal"
+              visible={isModalVisible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+              centered
+              footer={[
+                <Button key="submit" type="primary" onClick={handleOk}>
+                  Remove book from interested books
+                </Button>
+              ]}
+            >
+              <div className="modal-container">
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              </div>
+            </Modal>
+          </List.Item>
+        )}
+      />
+    </div>
   );
 };
 
