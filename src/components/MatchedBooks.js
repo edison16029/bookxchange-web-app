@@ -27,7 +27,6 @@ const MatchedBooks = ({ fetchMyAccountData }) => {
   );
   const [initallyActive, setInitallyActive] = useState(" initially-active");
   const [activeTab, setActiveTab] = useState(pageConstants.accountTabActive);
-  const [notification, setNotificationData] = useState("");
 
   const onAccountClick = () => {
     setInitallyActive("");
@@ -90,9 +89,7 @@ const MatchedBooks = ({ fetchMyAccountData }) => {
     <Layout>
       <div className="notification-container">
         <Dropdown overlay={menu}>
-          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
             <BellFilled className="notification" />
-          </a>
         </Dropdown>
       </div>
 
