@@ -7,6 +7,7 @@ import { BellFilled } from "@ant-design/icons";
 import { fetchMyAccountData } from "../redux/myAccountSlice";
 import { connect } from "react-redux";
 import MatchedBooksTab from "./MatchedBooksTab";
+import MyBooksTab from "./MyBooksTab";
 
 const pageConstants = {
   activeClassName: "tab-button-active",
@@ -78,7 +79,7 @@ const MatchedBooks = ({ fetchMyAccountData }) => {
 
   const MatchedBooksBody = () => <MatchedBooksTab />;
 
-  const MyBooksTabBody = () => <div>Hello Books</div>;
+  const MyBooksTabBody = () => <MyBooksTab />;
   const Body = () => {
     if (activeTab === pageConstants.accountTabActive)
       return <MatchedBooksBody />;

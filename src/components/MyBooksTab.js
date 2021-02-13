@@ -22,7 +22,7 @@ const mapStateToProps = (state) => ({
   myAccount: state.myAccount,
 });
 
-const MatchedBooksTab = ({ myAccount }) => {
+const MyBooksTab = ({ myAccount }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
@@ -36,7 +36,9 @@ const MatchedBooksTab = ({ myAccount }) => {
   };
   return (
     <div className="accounttab-container">
-      <Title level={2} className="align-center">Books you are interested in</Title>
+      <Title level={2} className="align-center">
+        Your books people are interested in
+      </Title>
       <List
         size="large"
         itemLayout="horizontal"
@@ -59,17 +61,20 @@ const MatchedBooksTab = ({ myAccount }) => {
               ]}
             >
               <div className="modal-container">
-              <div className="align-center">
-                <Title level={5}>Name</Title>
-                  <Text keyboard>Ant Design (keyboard)</Text>
+                <div className="align-center">
+                  <Text keyboard>Book Name</Text>
                 </div>
                 <div className="align-center">
-                <Title level={5}>Author</Title>
-                  <Text keyboard>Ant Design (keyboard)</Text>
-                </div>
-                <div className="align-center">
-                <Title level={5}>Owner</Title>
-                  <Text keyboard>Ant Design (keyboard)</Text>
+                  <Title level={2}>Interested People</Title>
+                  <List
+                    grid={{ gutter: 20, column:2 }}
+                    dataSource={data}
+                    renderItem={(item) => (
+                      <List.Item>
+                       {item.title}
+                      </List.Item>
+                    )}
+                  />
                 </div>
               </div>
             </Modal>
@@ -80,4 +85,4 @@ const MatchedBooksTab = ({ myAccount }) => {
   );
 };
 
-export default connect(mapStateToProps, null)(MatchedBooksTab);
+export default connect(mapStateToProps, null)(MyBooksTab);
