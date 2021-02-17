@@ -1,0 +1,181 @@
+@import "colors";
+
+@media all {
+  .profile-root-container {
+    background-color: $lightest_primary;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .accounttab-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+}
+
+  .tab-bar {
+    background-color: $lighter_primary;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .tab-body {
+    flex: 11;
+  }
+
+  .tab-button-inactive {
+    background-color: $lighter_primary;
+    color: $white;
+    border: 0;
+    border-radius: 0%;
+    flex: 1;
+    height: 100%;
+    font-size: calc(1vw + 2vh);
+  }
+
+  .tab-button-active,
+  .tab-button-active:focus,
+  .tab-button-active:hover {
+    background: $secondary !important;
+    color: $black !important;
+    border: 0;
+    border-radius: 0%;
+    flex: 1;
+    height: 100%;
+    font-size: calc(1vw + 2vh);
+  }
+
+  .initially-active {
+    background: $secondary;
+  }
+
+  .ant-btn:hover {
+    background: $lightest_primary;
+    color: $white;
+  }
+  .notification {
+    font-size: 40px;
+    color: $secondary;
+    margin: 10px;
+  }
+  .notification-container {
+  text-align:end;
+  }
+  .ant-dropdown-menu {
+    background-color: $secondary;
+    text-align: center;
+  }
+  .ant-dropdown-menu-item,
+  .ant-dropdown-menu-submenu-title {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  .ant-dropdown-menu-item-group-title {
+    color: $secondary;
+    font-size: 18px;
+    background-color: $lightest_primary;
+    line-height: 30px;
+  }
+  .ant-dropdown {
+    align-items: center;
+  }
+  .ant-list-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 12px 0;
+    color: $white;
+    background-color: $primary;
+    font-size: 30px;
+  }
+
+  .ant-list {
+    margin: 40px;
+    padding: 30px;
+    text-align: center;
+  }
+  .ant-list-split .ant-list-item {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .ant-list-lg .ant-list-item {
+    padding: 20px 24px;
+  }
+  .ant-modal {
+    color: $white;
+  }
+  .ant-modal-header {
+    background: $lightest_primary;
+    border-bottom: 0px;
+  }
+  .ant-modal-title {
+    color: $white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 24px;
+  }
+  .modal-container{
+    height: max-content;
+  }
+  .ant-modal-content {
+    background-color: $lightest_primary;
+  }
+  .ant-modal-footer {
+    text-align: center;
+    border-top: 0px;
+  }
+  .ant-modal-close {
+    color:$white;
+  }
+  .ant-btn-primary {
+    color:$black;
+    background: $secondary;
+    border-color: $secondary;
+  }
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  color:$black;
+  background: #ccac00;
+  border-color: #ccac00;
+}
+.ant-btn-link {
+  color: $white;
+  background: transparent;
+}
+.ant-btn-link:hover,
+.ant-btn-link:focus {
+  color: $white;
+  background: transparent;
+}
+.ant-typography {
+  color: $white;
+  overflow-wrap: break-word;
+}
+h2.ant-typography,
+.ant-typography h2,
+h3.ant-typography,
+.ant-typography h3,
+h4.ant-typography,
+.ant-typography h4,
+h5.ant-typography,
+.ant-typography h5 {
+  color: $white;
+  margin-bottom: 2;
+}
+.ant-typography kbd {
+  font-size: 120%;
+  color: $white;
+}
+.align-center
+{
+  text-align: center;
+}
+}

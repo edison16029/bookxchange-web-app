@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import Profile from './Profile';
-import BrowseBooks from './BrowseBooks';
-import { MatchedBooks } from './MatchedBooks';
+import  BrowseBooks  from './BrowseBooks';
+import  MatchedBooks  from './MatchedBooks';
 import { NavigationBar} from './presentationalComponents/NavigationBar';
 import Login from './Login';
 import Signup from './Signup';
