@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Layout } from "./presentationalComponents/Layout";
 import Button from "./presentationalComponents/Button";
 import "../styles/matchedbooks.scss";
-import { Menu, Dropdown } from "antd";
-import { BellFilled } from "@ant-design/icons";
+
 import { fetchMyAccountData } from "../redux/myAccountSlice";
 import { connect } from "react-redux";
 import MatchedBooksTab from "./MatchedBooksTab";
@@ -35,39 +34,7 @@ const MatchedBooks = ({ fetchMyAccountData }) => {
     setActiveTab(pageConstants.accountTabActive);
   };
 
-  const menu = (
-    <Menu>
-      <Menu.ItemGroup title="Mark as Read">
-        <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.alipay.com/"
-          >
-            1st menu item
-          </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.taobao.com/"
-          >
-            2nd menu item
-          </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.tmall.com/"
-          >
-            3rd menu item
-          </a>
-        </Menu.Item>
-      </Menu.ItemGroup>
-    </Menu>
-  );
+
 
   const onMyBooksClick = () => {
     setInitallyActive("");
@@ -87,11 +54,7 @@ const MatchedBooks = ({ fetchMyAccountData }) => {
 
   return (
     <Layout>
-      <div className="notification-container">
-        <Dropdown overlay={menu}>
-            <BellFilled className="notification" />
-        </Dropdown>
-      </div>
+
 
       <div className="profile-root-container">
         <div className="tab-bar">
