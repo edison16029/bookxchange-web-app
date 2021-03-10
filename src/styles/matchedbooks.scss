@@ -140,42 +140,44 @@
     background: $secondary;
     border-color: $secondary;
   }
-.ant-btn-primary:hover,
-.ant-btn-primary:focus {
-  color:$black;
-  background: #ccac00;
-  border-color: #ccac00;
-}
-.ant-btn-link {
-  color: $white;
-  background: transparent;
-}
-.ant-btn-link:hover,
-.ant-btn-link:focus {
-  color: $white;
-  background: transparent;
-}
-.ant-typography {
-  color: $white;
-  overflow-wrap: break-word;
-}
-h2.ant-typography,
-.ant-typography h2,
-h3.ant-typography,
-.ant-typography h3,
-h4.ant-typography,
-.ant-typography h4,
-h5.ant-typography,
-.ant-typography h5 {
-  color: $white;
-  margin-bottom: 2;
-}
-.ant-typography kbd {
-  font-size: 120%;
-  color: $white;
-}
-.align-center
-{
-  text-align: center;
-}
+  .ant-btn-primary:hover,
+  .ant-btn-primary:focus {
+    color:$black;
+    background: #ccac00;
+    border-color: #ccac00;
+  }
+  .ant-btn-link {
+    color: $white;
+    background: transparent;
+  }
+  .ant-btn-link:hover,
+  .ant-btn-link:focus {
+    color: $white;
+    background: transparent;
+  }
+  .ant-typography {
+    color: $white;
+    overflow-wrap: break-word;
+  }
+  h2.ant-typography,
+  .ant-typography h2,
+  h3.ant-typography,
+  .ant-typography h3,
+  h4.ant-typography,
+  .ant-typography h4,
+  h5.ant-typography,
+  .ant-typography h5 {
+    color: $white;
+    margin-bottom: 2;
+  }
+  .ant-typography kbd {
+    font-size: 120%;
+    color: $white;
+  }
+  .align-center
+  {
+    text-align: center;
+  }
+
+
 }
