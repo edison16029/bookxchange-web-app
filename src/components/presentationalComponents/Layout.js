@@ -2,6 +2,7 @@ import React from 'react'
 import { Menu, Dropdown } from "antd";
 import { BellFilled } from "@ant-design/icons";
 import '../../styles/layout.scss';
+import '../../styles/ant.scss';
 
 export const Layout = (props) => {
     const menu = (

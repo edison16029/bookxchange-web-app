@@ -55,6 +55,18 @@ class API {
                 return (
                     axios.put(endpointUrl, {})
                 )
+            },
+            fetchBooksILiked: () => {
+                var endpointUrl = this.url + "/books/liked";
+                return (
+                    axios.get(endpointUrl, {})
+                )
+            },
+            fetchBooksOthersLiked: () => {
+                var endpointUrl = this.url + "/books/othersLiked";
+                return (
+                    axios.get(endpointUrl, {})
+                )
             }
         }
     }
