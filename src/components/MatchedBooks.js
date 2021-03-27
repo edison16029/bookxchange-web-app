@@ -19,6 +19,7 @@ const MatchedBooks = props => {
   useEffect( () => {
     fetchBooksILiked();
     fetchBooksOthersLiked();
+    // eslint-disable-next-line
   }, [pageLoad])
 
   let dataFetched = matchedBooks.booksILikedStatus === "fetched" && matchedBooks.booksOthersLikedStatus === "fetched";
