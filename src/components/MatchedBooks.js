@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+
 import { Layout } from "./presentationalComponents/Layout";
 import TabsContainer from './presentationalComponents/TabsContainer';
+import BooksILikedTab from "./tabs/BooksILikedTab";
+import BooksOthersLikedTab from "./tabs/BooksOthersLikedTab";
 
 import { fetchBooksILiked, fetchBooksOthersLiked } from "../redux/matchedBooksSlice";
-
-import { connect } from "react-redux";
-import BooksILikedTab from "./BooksILikedTab";
-import BooksOthersLikedTab from "./BooksOthersLikedTab";
 
 const MatchedBooks = props => {
   const {
@@ -27,24 +27,33 @@ const MatchedBooks = props => {
   let booksILiked = [];
   let booksOthersLiked = [];
   if(dataFetched){
-    booksILiked = matchedBooks.data.booksILiked.map(book => {
-      let bookILiked = { ...book, title : book.name}
-      return bookILiked;
-    });
-    booksOthersLiked = matchedBooks.data.booksOthersLiked.map(book => {
-      let bookOthersLiked = { ...book, title : book.name}
-      return bookOthersLiked;
-    })
+    if(!matchedBooks.booksILikedError && !matchedBooks.booksOthersLikedError){ //change
+      booksILiked = matchedBooks.data.booksILiked.map(book => {
+        let bookILiked = { ...book, title : book.name}
+        return bookILiked;
+      });
+      booksOthersLiked = matchedBooks.data.booksOthersLiked.map(book => {
+        let bookOthersLiked = { ...book, title : book.name}
+        return bookOthersLiked;
+      })
+    }
+    else{ //TODO : Add Error Page here
+        return (
+            <Layout>
+                ERRRRRRRRRRROR
+            </Layout>
+          ) 
+    }
   }
   else{
-    //TODO : Add Error Page here
+    //TODO : Add Loading Page here
     return (
       <Layout>
 
       </Layout>
     ) 
   }
-  
+
   return (
     <Layout>
       <TabsContainer 

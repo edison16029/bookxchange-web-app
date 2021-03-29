@@ -67,6 +67,12 @@ class API {
                 return (
                     axios.get(endpointUrl, {})
                 )
+            },
+            fetchBooksIOwn: () => {
+                var endpointUrl = this.url + "/books/owned";
+                return (
+                    axios.get(endpointUrl, {})
+                )
             }
         }
     }

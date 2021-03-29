@@ -1,7 +1,7 @@
 import React from "react";
-import TabView from './presentationalComponents/TabView';
+import TabView from '../presentationalComponents/TabView';
 
-import '../styles/styles.scss';
+import '../../styles/styles.scss';
 
 const BooksOthersLikedTab = ({ data }) => {
   return (

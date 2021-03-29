@@ -36,7 +36,8 @@ const matchedBooksSlice = createSlice({
   name: 'matchedBooks',
   initialState: { 
         data : {},
-        error : false,
+        booksILikedError : false,
+        booksOthersLikedError: false,
         booksILikedStatus : "initial",
         booksOthersLikedStatus : "initial"
   },
@@ -45,22 +46,22 @@ const matchedBooksSlice = createSlice({
     extraReducers : {
         [fetchBooksILiked.fulfilled] : (state, action) => {
             state.data.booksILiked = action.payload.data.books;
-            state.error = false;
+            state.booksILikedError = false;
             state.booksILikedStatus = "fetched";
         },
         [fetchBooksILiked.rejected] : (state, action) => {
             state.data = {};
-            state.error = true;
+            state.booksILikedError = true;
             state.booksILikedStatus = "fetched";
         },
         [fetchBooksOthersLiked.fulfilled] : (state, action) => {
             state.data.booksOthersLiked = action.payload.data.books;
-            state.error = false;
+            state.booksOthersLikedError = false;
             state.booksOthersLikedStatus = "fetched";
         },
         [fetchBooksOthersLiked.rejected] : (state, action) => {
             state.data = {};
-            state.error = true;
+            state.booksOthersLikedError = true;
             state.booksOthersLikedStatus = "fetched";
         }
     }

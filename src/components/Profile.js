@@ -1,69 +1,73 @@
-import React, { useState } from 'react'
-import { Layout } from './presentationalComponents/Layout';
-import Button from './presentationalComponents/Button';
-import '../styles/profile.scss';
-import AccountTab from './AccountTab';
-import { fetchMyAccountData } from '../redux/myAccountSlice'
-import { connect } from 'react-redux'
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
+import { Layout } from "./presentationalComponents/Layout";
+import TabsContainer from './presentationalComponents/TabsContainer';
+import AccountTab from "./tabs/AccountTab";
+import YourBooksTab from "./tabs/YourBooksTab";
 
-const pageConstants = {
-    activeClassName : "tab-button-active",
-    inactiveClassName : "tab-button-inactive",
-    accountTabActive : "account-active",
-    myBooksTabActive : "my-books-active"
-} 
+import { fetchMyAccountData, fetchBooksIOwn } from "../redux/profileSlice";
 
-const mapDispatchToProps = { fetchMyAccountData}
-const Profile = ({fetchMyAccountData}) => {
-
+const Profile = props => {
+  const {
+    profile,
+    fetchMyAccountData,
+    fetchBooksIOwn
+  } = props;
+  // eslint-disable-next-line
+  const [pageLoad, setpageLoad] = useState("");
+  useEffect( () => {
     fetchMyAccountData();
-    const [accountButtonClassName, setAccountButtonClassName] = useState(pageConstants.activeClassName);
-    const [myBooksButtonClassName, setMyBooksAccountButtonClassName] = useState(pageConstants.inactiveClassName);
-    const [initallyActive, setInitallyActive] = useState(" initially-active");
-    const [activeTab, setActiveTab] = useState(pageConstants.accountTabActive);
+    fetchBooksIOwn();
+    // eslint-disable-next-line
+  }, [pageLoad])
 
-    const onAccountClick = () => {
-        setInitallyActive("");
-        setAccountButtonClassName(pageConstants.activeClassName);
-        setMyBooksAccountButtonClassName(pageConstants.inactiveClassName);
-        setActiveTab(pageConstants.accountTabActive);
+  let dataFetched = profile.myAccountStatus === "fetched" && profile.booksIOwnStatus === "fetched";
+ 
+  let accountInfo = [];
+  let booksIOwn = [];
+  if(dataFetched){
+    if(!profile.accountInfoError && !profile.booksIOwnError){
+        //AccountInfo data
+        accountInfo.push({title : profile.data.accountInfo.name})
+        accountInfo.push({title : profile.data.accountInfo.email})
+        accountInfo.push({title : profile.data.accountInfo.location})
+        //BooksIOwn data
+        booksIOwn = profile.data.booksIOwn.map(book => {
+              let bookIOwn = { ...book, title : book.name}
+              return bookIOwn;
+            });
     }
-
-    const onMyBooksClick = () => {
-        setInitallyActive("");
-        setAccountButtonClassName(pageConstants.inactiveClassName);
-        setMyBooksAccountButtonClassName(pageConstants.activeClassName);
-        setActiveTab(pageConstants.myBooksTabActive);
+    else{ //TODO : Add Error Page here
+        return (
+            <Layout>
+                ERRRRRRRRRRROR
+            </Layout>
+          ) 
     }
-
-    const AccountTabBody = () => (
-        <AccountTab />
-    )
-
-    const MyBooksTabBody = () => (
-        <div>Hello Books</div>
-    )
-    const Body = () => {
-        if(activeTab === pageConstants.accountTabActive)
-            return <AccountTabBody />;
-        else
-            return <MyBooksTabBody />;
-    }
-
+  }
+  else{
+    //TODO : Add Loading Page here
     return (
-        <Layout>
-            <div className = "profile-root-container">
-                <div className = "tab-bar">
-                    <Button className = {accountButtonClassName + initallyActive} buttonText = "Account" onClick = {onAccountClick}/>
-                    <Button className = {myBooksButtonClassName} buttonText = "My Books" onClick = {onMyBooksClick}/>
-                </div>
-                <div className = "tab-body">
-                    {Body()}
-                </div>
-            </div>
-        </Layout>
-    )
-}
+      <Layout>
+            LOADINGG
+      </Layout>
+    ) 
+  }
+  
+  return (
+    <Layout>
+      <TabsContainer 
+        LeftTab = {() => <AccountTab data={accountInfo}/>}
+        RightTab = {() => <YourBooksTab data={booksIOwn}/>}
+        leftTabText = "Account Info"
+        rightTabText = "Your books"/>
+    </Layout>
+  )
+};
 
-export default connect(null, mapDispatchToProps)(Profile)
+const mapStateToProps = state => ({
+    profile : state.profile
+});
+
+export default connect(mapStateToProps, { fetchMyAccountData, fetchBooksIOwn })(Profile);
