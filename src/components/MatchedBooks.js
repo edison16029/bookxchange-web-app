@@ -1,78 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "./presentationalComponents/Layout";
-import Button from "./presentationalComponents/Button";
-import "../styles/matchedbooks.scss";
+import TabsContainer from './presentationalComponents/TabsContainer';
 
-import { fetchMyAccountData } from "../redux/myAccountSlice";
+import { fetchBooksILiked, fetchBooksOthersLiked } from "../redux/matchedBooksSlice";
+
 import { connect } from "react-redux";
-import MatchedBooksTab from "./MatchedBooksTab";
-import MyBooksTab from "./MyBooksTab";
+import BooksILikedTab from "./BooksILikedTab";
+import BooksOthersLikedTab from "./BooksOthersLikedTab";
 
-const pageConstants = {
-  activeClassName: "tab-button-active",
-  inactiveClassName: "tab-button-inactive",
-  accountTabActive: "account-active",
-  myBooksTabActive: "my-books-active",
-};
+const MatchedBooks = props => {
+  const {
+    matchedBooks,
+    fetchBooksILiked,
+    fetchBooksOthersLiked
+  } = props;
+  // eslint-disable-next-line
+  const [pageLoad, setpageLoad] = useState("");
+  useEffect( () => {
+    fetchBooksILiked();
+    fetchBooksOthersLiked();
+    // eslint-disable-next-line
+  }, [pageLoad])
 
-const mapDispatchToProps = { fetchMyAccountData };
-const MatchedBooks = ({ fetchMyAccountData }) => {
-  fetchMyAccountData();
-  const [accountButtonClassName, setAccountButtonClassName] = useState(
-    pageConstants.activeClassName
-  );
-  const [myBooksButtonClassName, setMyBooksAccountButtonClassName] = useState(
-    pageConstants.inactiveClassName
-  );
-  const [initallyActive, setInitallyActive] = useState(" initially-active");
-  const [activeTab, setActiveTab] = useState(pageConstants.accountTabActive);
+  let dataFetched = matchedBooks.booksILikedStatus === "fetched" && matchedBooks.booksOthersLikedStatus === "fetched";
+ 
+  let booksILiked = [];
+  let booksOthersLiked = [];
+  if(dataFetched){
+    booksILiked = matchedBooks.data.booksILiked.map(book => {
+      let bookILiked = { ...book, title : book.name}
+      return bookILiked;
+    });
+    booksOthersLiked = matchedBooks.data.booksOthersLiked.map(book => {
+      let bookOthersLiked = { ...book, title : book.name}
+      return bookOthersLiked;
+    })
+  }
+  else{
+    //TODO : Add Error Page here
+    return (
+      <Layout>
 
-  const onAccountClick = () => {
-    setInitallyActive("");
-    setAccountButtonClassName(pageConstants.activeClassName);
-    setMyBooksAccountButtonClassName(pageConstants.inactiveClassName);
-    setActiveTab(pageConstants.accountTabActive);
-  };
-
-
-
-  const onMyBooksClick = () => {
-    setInitallyActive("");
-    setAccountButtonClassName(pageConstants.inactiveClassName);
-    setMyBooksAccountButtonClassName(pageConstants.activeClassName);
-    setActiveTab(pageConstants.myBooksTabActive);
-  };
-
-  const MatchedBooksBody = () => <MatchedBooksTab />;
-
-  const MyBooksTabBody = () => <MyBooksTab />;
-  const Body = () => {
-    if (activeTab === pageConstants.accountTabActive)
-      return <MatchedBooksBody />;
-    else return <MyBooksTabBody />;
-  };
-
+      </Layout>
+    ) 
+  }
+  
   return (
     <Layout>
-
-
-      <div className="profile-root-container">
-        <div className="tab-bar">
-          <Button
-            className={accountButtonClassName + initallyActive}
-            buttonText="Books you are interested in"
-            onClick={onAccountClick}
-          />
-          <Button
-            className={myBooksButtonClassName}
-            buttonText="Your books people are interested in"
-            onClick={onMyBooksClick}
-          />
-        </div>
-        <div className="tab-body">{Body()}</div>
-      </div>
+      <TabsContainer 
+        LeftTab = {() => <BooksILikedTab data={booksILiked}/>}
+        RightTab = {() => <BooksOthersLikedTab data={booksOthersLiked}/>}
+        leftTabText = "Books you are interested in"
+        rightTabText = "Your books people are interested in"/>
     </Layout>
-  );
+  )
 };
 
-export default connect(null, mapDispatchToProps)(MatchedBooks);
+const mapStateToProps = state => ({
+  matchedBooks : state.matchedBooks
+});
+
+export default connect(mapStateToProps, { fetchBooksILiked, fetchBooksOthersLiked })(MatchedBooks);

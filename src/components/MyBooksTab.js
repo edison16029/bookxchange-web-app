@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { List, Modal, Button, Typography } from "antd";
-import "../styles/matchedbooks.scss";
 const { Title, Text } = Typography;
 const data = [
   {
