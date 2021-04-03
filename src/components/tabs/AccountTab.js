@@ -8,7 +8,9 @@ const AccountTab = ({ data }) => {
     <TabView 
       data = {data}
       title = {"Account Information"}
-      numberOfBooksPerPage = {5} />
+      numberOfBooksPerPage = {5} 
+      showButton
+      buttonText = {"Update Profile"}/>
   );
 };
 

@@ -1,4 +1,5 @@
 import { Button } from 'antd';
+import '../../styles/buttons.scss'
 
 const StandardButton = (props) => {
     return (
@@ -6,4 +7,11 @@ const StandardButton = (props) => {
     )
 }
 
+const UpdateButton = (props) => {
+    return (
+        <Button className = {"update-button " + props.className} onClick = {props.onClick}>{props.buttonText}</Button>
+    )
+}
+
+export { UpdateButton };
 export default StandardButton;

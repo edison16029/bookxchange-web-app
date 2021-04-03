@@ -5,7 +5,7 @@ import { Layout } from "./presentationalComponents/Layout";
 import TabsContainer from './presentationalComponents/TabsContainer';
 import AccountTab from "./tabs/AccountTab";
 import YourBooksTab from "./tabs/YourBooksTab";
-
+import SampleModal from './modals/SampleModal';
 import { fetchMyAccountData, fetchBooksIOwn } from "../redux/profileSlice";
 
 const Profile = props => {
@@ -62,6 +62,7 @@ const Profile = props => {
         RightTab = {() => <YourBooksTab data={booksIOwn}/>}
         leftTabText = "Account Info"
         rightTabText = "Your books"/>
+      <SampleModal showModalInitial={false}/>
     </Layout>
   )
 };

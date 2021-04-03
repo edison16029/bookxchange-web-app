@@ -8,7 +8,8 @@ const BooksILikedTab = ({ data }) => {
     <TabView 
       data = {data}
       title = {"Books you are interested in"}
-      numberOfBooksPerPage = {5} />
+      numberOfBooksPerPage = {5} 
+      showPagination />
   );
 };
 

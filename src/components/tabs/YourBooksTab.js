@@ -8,7 +8,10 @@ const YourBooksTab = ({ data }) => {
     <TabView 
       data = {data}
       title = {"Your Books"}
-      numberOfBooksPerPage = {5} />
+      numberOfBooksPerPage = {5} 
+      showPagination 
+      showButton
+      buttonText = {"Add Book"}/>
   );
 };
 
