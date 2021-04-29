@@ -1,60 +1,70 @@
-import React from 'react'
-import { Menu, Dropdown } from "antd";
+import React from "react";
+import { Menu, Dropdown, Button } from "antd";
 import { BellFilled } from "@ant-design/icons";
-import '../../styles/layout.scss';
-import '../../styles/ant.scss';
+import "../../styles/layout.scss";
+import "../../styles/ant.scss";
+import API from "../../shared/api";
+import handleApiError from "../../shared/errorhandler";
+import notifyUser from "../../shared/Notification";
+import { connect } from "react-redux";
 
-export const Layout = (props) => {
-    const menu = (
-        <Menu>
-          <Menu.ItemGroup title="Notifications">
-            <Menu.Item>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.alipay.com/"
-              >
-                1st menu item
-              </a>
-            </Menu.Item>
-            <Menu.Item>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.taobao.com/"
-              >
-                2nd menu item
-              </a>
-            </Menu.Item>
-            <Menu.Item>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://www.tmall.com/"
-              >
-                3rd menu item
-              </a>
-            </Menu.Item>
-          </Menu.ItemGroup>
-        </Menu>
+const mapStateToProps = (state) => ({
+  notifications: state.myAccount.data.notifications,
+  timestamp: state.myAccount.data.timestamp,
+});
+const readNotifs = (timestamp) => {
+  const requestBody = {
+    timestamp: timestamp,
+  };
+  const myApi = new API();
+  myApi.endpoints.users
+    .readNotifications(requestBody)
+    .then((response) => {
+      notifyUser(
+        "success",
+        "Notifications cleared!",
+        "Notifications have been marked as read."
       );
+    })
+    .catch((error) => {
+      handleApiError(error);
+    });
+};
+const Layout = (props) => {
+  const { notifications, timestamp } = props;
+  let newNotifs = notifications === undefined ? [] : notifications;
+  const menu = (
+    <Menu>
+      {newNotifs.length !== 0 ? (
+        <Button onClick={() => readNotifs(timestamp)}>Mark as Read</Button>
+      ) : (
+        <Button disabled>Mark as Read</Button>
+      )}
 
-    return (
-        <div className = "full-container">
-            <div className = "mini-container" />
-            <div className = "layout-container">
-                <div className = "layout-inner-container">
-                    {props.children}
-                </div>
-            </div>
-            <div className = "mini-container">
-                <div className="notification-container">
-                    <Dropdown overlay={menu}>
-                        <BellFilled className="notification" />
-                    </Dropdown>
-                </div>                
-            </div>
+      <Menu.ItemGroup title="Notifications">
+        {newNotifs.length !== 0 ? (
+          notifications.map((value) => <Menu.Item>{value.text}</Menu.Item>)
+        ) : (
+          <div>No New Notifications</div>
+        )}
+      </Menu.ItemGroup>
+    </Menu>
+  );
+
+  return (
+    <div className="full-container">
+      <div className="mini-container" />
+      <div className="layout-container">
+        <div className="layout-inner-container">{props.children}</div>
+      </div>
+      <div className="mini-container">
+        <div className="notification-container">
+          <Dropdown overlay={menu}>
+            <BellFilled className="notification" />
+          </Dropdown>
         </div>
-        
-    )
-}
+      </div>
+    </div>
+  );
+};
+export default connect(mapStateToProps, null)(Layout);

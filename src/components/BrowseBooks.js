@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import BookView from './presentationalComponents/BookView'
-import { Layout } from './presentationalComponents/Layout';
+import Layout  from './presentationalComponents/Layout';
 import { fetchBooks } from '../redux/booksSlice'
 import { connect } from 'react-redux'
 import { Pagination } from 'antd';

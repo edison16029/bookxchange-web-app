@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Layout } from './presentationalComponents/Layout';
+import Layout from './presentationalComponents/Layout';
 import Button from './presentationalComponents/Button';
 import '../styles/profile.scss';
 import AccountTab from './AccountTab';
