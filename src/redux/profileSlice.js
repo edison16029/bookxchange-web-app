@@ -32,6 +32,51 @@ export const fetchBooksIOwn = createAsyncThunk(
     }
   )
 
+export const updateMyAccountData = createAsyncThunk(
+    'profile/updateMyAccountData',
+    (data, ThunkAPI) => {
+        const myApi = new API();
+        return myApi.endpoints.users.updateMyUser(data.name, data.location)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            handleApiError(error);         
+            return ThunkAPI.rejectWithValue();       
+        });  
+    }
+  )
+
+export const updateBookInfo = createAsyncThunk(
+    'books/updateBookInfo',
+    (data, ThunkAPI) => {
+        const myApi = new API();
+        return myApi.endpoints.books.updateBook(data.id, data.data)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            handleApiError(error);         
+            return ThunkAPI.rejectWithValue();       
+        });  
+    }
+  )
+
+export const addBook = createAsyncThunk(
+    'books/addBook',
+    (data, ThunkAPI) => {
+        const myApi = new API();
+        return myApi.endpoints.books.addBook(data)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            handleApiError(error);         
+            return ThunkAPI.rejectWithValue();       
+        });  
+    }
+  )
+
 const profileSlice = createSlice({
   name: 'profile',
   initialState: { 
@@ -44,6 +89,16 @@ const profileSlice = createSlice({
   reducers: {
         addMyAccountData(state, action) {
             state.data = action.payload;
+        },
+        resetAccountInfo(state) {
+            state.data.accountInfo = {};
+            state.accountInfoError = false;
+            state.myAccountStatus = "initial";
+        },
+        resetBooksIOwnInfo(state) {
+            state.data.booksIOwn = {};
+            state.booksIOwnError = false;
+            state.booksIOwnStatus = "initial";
         }
     },
     extraReducers : {
@@ -66,9 +121,9 @@ const profileSlice = createSlice({
             state.data.booksIOwn = {};
             state.booksIOwnError = true;
             state.booksIOwnStatus = "fetched";
-        }
+        },
     }
 })
 
-export const { addMyAccountData } = profileSlice.actions
+export const { addMyAccountData, resetAccountInfo, resetBooksIOwnInfo } = profileSlice.actions
 export default profileSlice.reducer

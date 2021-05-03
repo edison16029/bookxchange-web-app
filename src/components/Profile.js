@@ -5,22 +5,38 @@ import { Layout } from "./presentationalComponents/Layout";
 import TabsContainer from './presentationalComponents/TabsContainer';
 import AccountTab from "./tabs/AccountTab";
 import YourBooksTab from "./tabs/YourBooksTab";
-import SampleModal from './modals/SampleModal';
-import { fetchMyAccountData, fetchBooksIOwn } from "../redux/profileSlice";
+import UpdateProfileModal from './modals/UpdateProfileModal';
+import AddBookModal from './modals/AddBookModal';
+import EditBookModal from './modals/EditBookModal';
+import { fetchMyAccountData, fetchBooksIOwn, updateMyAccountData, resetAccountInfo, resetBooksIOwnInfo, updateBookInfo, addBook } from "../redux/profileSlice";
 
 const Profile = props => {
   const {
     profile,
     fetchMyAccountData,
-    fetchBooksIOwn
+    fetchBooksIOwn,
+    updateMyAccountData,
+    resetAccountInfo,
+    updateBookInfo,
+    resetBooksIOwnInfo,
+    addBook
   } = props;
+
+  const [showUpdateProfileModal, setShowUpdateProfileModal] = useState(false);
+  const [showAddBookModal, setShowAddBookModal] = useState(false);
+  const [showEditBookModal, setShowEditBookModal] = useState(false);
+  const [bookInfo, setBookInfo] = useState({});
+
   // eslint-disable-next-line
-  const [pageLoad, setpageLoad] = useState("");
+  const [pageLoad, setpageLoad] = useState(0);
   useEffect( () => {
+    console.log("UseEffect Invoked");
     fetchMyAccountData();
     fetchBooksIOwn();
     // eslint-disable-next-line
   }, [pageLoad])
+
+  let accountInfoData = {}
 
   let dataFetched = profile.myAccountStatus === "fetched" && profile.booksIOwnStatus === "fetched";
  
@@ -32,6 +48,9 @@ const Profile = props => {
         accountInfo.push({title : profile.data.accountInfo.name})
         accountInfo.push({title : profile.data.accountInfo.email})
         accountInfo.push({title : profile.data.accountInfo.location})
+        //For Displaying in the Modal to update the Account Info
+        accountInfoData = profile.data.accountInfo;
+        console.log("accountInfoData : ", accountInfoData);
         //BooksIOwn data
         booksIOwn = profile.data.booksIOwn.map(book => {
               let bookIOwn = { ...book, title : book.name}
@@ -54,15 +73,45 @@ const Profile = props => {
       </Layout>
     ) 
   }
-  
+
+  const onYourBookItemClick = bookId => {
+    let chosenBook = booksIOwn.filter(book => book._id === bookId)[0];
+    setBookInfo(chosenBook);
+    setShowEditBookModal(true);
+  }
+
+  const onUpdateProfile = data => {
+    resetAccountInfo();
+    updateMyAccountData(data).then(() => {
+      setpageLoad(pageLoad+1);
+    });
+  }
+
+  const onUpdateBook = data => {
+    resetBooksIOwnInfo();
+    updateBookInfo(data).then(() => {
+      setpageLoad(pageLoad+1);
+    });
+  }
+
+  const onAddBook = data => {
+    resetBooksIOwnInfo();
+    console.log("Data for Adding Book ", data);
+    addBook(data).then(() => {
+      setpageLoad(pageLoad+1);
+    });
+  }
+
   return (
     <Layout>
       <TabsContainer 
-        LeftTab = {() => <AccountTab data={accountInfo}/>}
-        RightTab = {() => <YourBooksTab data={booksIOwn}/>}
+        LeftTab = {() => <AccountTab data={accountInfo} setShowModal={setShowUpdateProfileModal}/>}
+        RightTab = {() => <YourBooksTab data={booksIOwn} setShowModal={setShowAddBookModal} itemOnClick={onYourBookItemClick}/>}
         leftTabText = "Account Info"
         rightTabText = "Your books"/>
-      <SampleModal showModalInitial={false}/>
+      <UpdateProfileModal accountInfo={accountInfoData} onUpdateProfile={onUpdateProfile} showModal={showUpdateProfileModal} setShowModal={setShowUpdateProfileModal}/> 
+      <AddBookModal onAddBook={onAddBook} showModal={showAddBookModal} setShowModal={setShowAddBookModal}/> 
+      <EditBookModal bookInfo={bookInfo} onUpdateBook={onUpdateBook} showModal={showEditBookModal} setShowModal={setShowEditBookModal}/> 
     </Layout>
   )
 };
@@ -71,4 +120,4 @@ const mapStateToProps = state => ({
     profile : state.profile
 });
 
-export default connect(mapStateToProps, { fetchMyAccountData, fetchBooksIOwn })(Profile);
+export default connect(mapStateToProps, { fetchMyAccountData, fetchBooksIOwn, updateMyAccountData, resetAccountInfo, updateBookInfo, resetBooksIOwnInfo, addBook })(Profile);

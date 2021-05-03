@@ -3,7 +3,7 @@ import TabView from '../presentationalComponents/TabView';
 
 import '../../styles/styles.scss';
 
-const YourBooksTab = ({ data }) => {
+const YourBooksTab = ({ data, setShowModal, itemOnClick }) => {
   return (
     <TabView 
       data = {data}
@@ -11,7 +11,9 @@ const YourBooksTab = ({ data }) => {
       numberOfBooksPerPage = {5} 
       showPagination 
       showButton
-      buttonText = {"Add Book"}/>
+      buttonText = {"Add Book"}
+      buttonOnClick = {() => { setShowModal(true)}}
+      itemOnClick={itemOnClick} />
   );
 };
 

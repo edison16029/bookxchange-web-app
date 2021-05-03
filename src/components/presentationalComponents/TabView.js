@@ -6,7 +6,7 @@ import '../../styles/styles.scss';
 import '../../styles/tabview.scss';
 
 const TabView = (props) => {
-    const { data, title, numberOfBooksPerPage, showPagination, showButton, buttonText} = props;
+    const { data, title, numberOfBooksPerPage, showPagination, showButton, buttonText, buttonOnClick, itemOnClick} = props;
     const [currentPage, setCurrentPage] = useState(1);
     const onPageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -16,7 +16,7 @@ const TabView = (props) => {
     
     const itemList = data.slice(startIndex, startIndex + numberOfBooksPerPage).map(item => {
         return(
-          <TextItem text={item.title}/>
+          <TextItem id={item._id} text={item.title} itemOnClick={itemOnClick}/>
         )
     });
 
@@ -37,7 +37,7 @@ const TabView = (props) => {
           {
             showButton && 
             <div className = "tab-pagination-container button-padding">
-              <UpdateButton buttonText={buttonText}/>
+              <UpdateButton buttonText={buttonText} onClick={buttonOnClick}/>
             </div>
           }
         </div>

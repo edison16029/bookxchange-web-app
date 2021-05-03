@@ -1,0 +1,19 @@
+@import "colors";
+@import "fonts";
+
+@media all {
+    .ant-modal-content {
+        background-color: $lightest_primary;
+        border-radius: 30px;
+        height: 420px;
+    }
+    .ant-modal-header {
+        background: none;
+    }
+    .modal-body-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

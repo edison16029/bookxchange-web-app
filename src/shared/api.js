@@ -41,6 +41,16 @@ class API {
                 return (
                     axios.get(endpointUrl, {})
                 )
+            },
+            updateMyUser: (name, location) => {
+                var endpointUrl = this.url + "/users/me";
+                let body = {
+                    name: name,
+                    location: location
+                }
+                return (
+                    axios.patch(endpointUrl, body)
+                )
             }
         };
         this.endpoints['books'] = {
@@ -73,7 +83,19 @@ class API {
                 return (
                     axios.get(endpointUrl, {})
                 )
-            }
+            },
+            updateBook: (id, data) => {
+                var endpointUrl = this.url + "/books/" + id;
+                return (
+                    axios.patch(endpointUrl, data)
+                )
+            },
+            addBook: (data) => {
+                var endpointUrl = this.url + "/books";
+                return (
+                    axios.post(endpointUrl, data)
+                )
+            },
         }
     }
 }
