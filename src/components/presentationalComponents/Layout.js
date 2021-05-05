@@ -7,12 +7,13 @@ import API from "../../shared/api";
 import handleApiError from "../../shared/errorhandler";
 import notifyUser from "../../shared/Notification";
 import { connect } from "react-redux";
+import { updateNotifs } from "../../redux/myAccountSlice";
 
 const mapStateToProps = (state) => ({
   notifications: state.myAccount.data.notifications,
   timestamp: state.myAccount.data.timestamp,
 });
-const readNotifs = (timestamp) => {
+const readNotifs = (timestamp,update) => {
   const requestBody = {
     timestamp: timestamp,
   };
@@ -25,18 +26,21 @@ const readNotifs = (timestamp) => {
         "Notifications cleared!",
         "Notifications have been marked as read."
       );
+      update(response.data.data.newNotifications.notifications);
     })
     .catch((error) => {
+      console.log(error)
       handleApiError(error);
     });
 };
 const Layout = (props) => {
-  const { notifications, timestamp } = props;
+  const { notifications, timestamp,updateNotifs } = props;
+  console.log(props);
   let newNotifs = notifications === undefined ? [] : notifications;
   const menu = (
     <Menu>
       {newNotifs.length !== 0 ? (
-        <Button onClick={() => readNotifs(timestamp)}>Mark as Read</Button>
+        <Button onClick={() => readNotifs(timestamp,updateNotifs)}>Mark as Read</Button>
       ) : (
         <Button disabled>Mark as Read</Button>
       )}
@@ -67,4 +71,4 @@ const Layout = (props) => {
     </div>
   );
 };
-export default connect(mapStateToProps, null)(Layout);
+export default connect(mapStateToProps, { updateNotifs})(Layout);
