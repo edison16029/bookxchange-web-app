@@ -3,13 +3,14 @@ import TabView from '../presentationalComponents/TabView';
 
 import '../../styles/styles.scss';
 
-const BooksILikedTab = ({ data }) => {
+const BooksILikedTab = ({ data, itemOnClick }) => {
   return (
     <TabView 
       data = {data}
-      title = {"Books you are interested in"}
+      title = {"Books you liked"}
       numberOfBooksPerPage = {5} 
-      showPagination />
+      showPagination
+      itemOnClick={itemOnClick} />
   );
 };
 

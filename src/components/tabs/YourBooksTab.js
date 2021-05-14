@@ -12,7 +12,7 @@ const YourBooksTab = ({ data, setShowModal, itemOnClick }) => {
       showPagination 
       showButton
       buttonText = {"Add Book"}
-      buttonOnClick = {() => { setShowModal(true)}}
+      buttonOnClick = {() => { setShowModal(true)}} 
       itemOnClick={itemOnClick} />
   );
 };

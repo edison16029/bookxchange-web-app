@@ -32,6 +32,51 @@ export const fetchBooksOthersLiked = createAsyncThunk(
     }
   )
 
+export const fetchUserById = createAsyncThunk(
+    'books/fetchUserById',
+    (data, ThunkAPI) => {
+        const myApi = new API();
+        return myApi.endpoints.users.fetchUserById(data)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            handleApiError(error);         
+            return ThunkAPI.rejectWithValue();       
+        });  
+    }
+  )
+
+export const unlikeBook = createAsyncThunk(
+    'books/unlikeBook',
+    (data, ThunkAPI) => {
+        const myApi = new API();
+        return myApi.endpoints.books.unlikeBook(data)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            handleApiError(error);         
+            return ThunkAPI.rejectWithValue();       
+        });  
+    }
+  )
+
+export const likeBook = createAsyncThunk(
+    'books/unlikeBook',
+    (data, ThunkAPI) => {
+        const myApi = new API();
+        return myApi.endpoints.books.likeBook(data)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            handleApiError(error);         
+            return ThunkAPI.rejectWithValue();       
+        });  
+    }
+  )
+
 const matchedBooksSlice = createSlice({
   name: 'matchedBooks',
   initialState: { 
@@ -42,6 +87,11 @@ const matchedBooksSlice = createSlice({
         booksOthersLikedStatus : "initial"
   },
   reducers: {
+        resetBooksILiked(state) {
+            state.data.booksILiked = {};
+            state.booksILikedError = false;
+            state.booksILikedStatus = "initial";
+        }
     },
     extraReducers : {
         [fetchBooksILiked.fulfilled] : (state, action) => {
@@ -67,4 +117,5 @@ const matchedBooksSlice = createSlice({
     }
 })
 
+export const { resetBooksILiked } = matchedBooksSlice.actions;
 export default matchedBooksSlice.reducer

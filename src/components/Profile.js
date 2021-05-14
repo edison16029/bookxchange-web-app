@@ -30,7 +30,6 @@ const Profile = props => {
   // eslint-disable-next-line
   const [pageLoad, setpageLoad] = useState(0);
   useEffect( () => {
-    console.log("UseEffect Invoked");
     fetchMyAccountData();
     fetchBooksIOwn();
     // eslint-disable-next-line

@@ -11,7 +11,7 @@
         width: 60%;
     }
     .text-input-label {
-        font-size: $medium-font;
+        font-size: $small-font;
         padding-bottom: 1%;
     }
     .text-input {
@@ -20,5 +20,9 @@
         font-size: $medium-font;
         color: black;
         padding-left: 3%;
+    }
+    .text-input-disable {
+        background-color: $lighter_primary;
+        color: white;
     }
 }

@@ -51,6 +51,12 @@ class API {
                 return (
                     axios.patch(endpointUrl, body)
                 )
+            },
+            fetchUserById: id => {
+                var endpointUrl = this.url + "/users/" + id;
+                return (
+                    axios.get(endpointUrl, {})
+                )
             }
         };
         this.endpoints['books'] = {
@@ -94,6 +100,12 @@ class API {
                 var endpointUrl = this.url + "/books";
                 return (
                     axios.post(endpointUrl, data)
+                )
+            },
+            unlikeBook: (id) => {
+                var endpointUrl = this.url + "/books/" + id + "/like";
+                return (
+                    axios.delete(endpointUrl, {})
                 )
             },
         }
