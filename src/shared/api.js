@@ -36,6 +36,12 @@ class API {
                     axios.post(endpointUrl, requestBody)
                 )
             },
+            readNotifications: (requestBody) => {
+                var endpointUrl = this.url + "/users/notifications";
+                return (
+                    axios.post(endpointUrl, requestBody)
+                )
+            },
             fetchMyUser: () => {
                 var endpointUrl = this.url + "/users/me";
                 return (

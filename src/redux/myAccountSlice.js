@@ -26,6 +26,9 @@ const myAccountSlice = createSlice({
   reducers: {
         addMyAccountData(state, action) {
             state.data = action.payload;
+        },
+        updateNotifs(state, action){
+            state.data.notifications = action.payload;
         }
     },
     extraReducers : {
@@ -42,5 +45,5 @@ const myAccountSlice = createSlice({
     }
 })
 
-export const { addMyAccountData } = myAccountSlice.actions
+export const { addMyAccountData,updateNotifs } = myAccountSlice.actions
 export default myAccountSlice.reducer
