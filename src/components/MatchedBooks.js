@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-
-import { Layout } from "./presentationalComponents/Layout";
+import  Layout  from "./presentationalComponents/Layout";
 import TabsContainer from './presentationalComponents/TabsContainer';
 import BooksILikedTab from "./tabs/BooksILikedTab";
 import BooksOthersLikedTab from "./tabs/BooksOthersLikedTab";

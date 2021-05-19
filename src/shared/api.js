@@ -36,6 +36,12 @@ class API {
                     axios.post(endpointUrl, requestBody)
                 )
             },
+            readNotifications: (requestBody) => {
+                var endpointUrl = this.url + "/users/notifications";
+                return (
+                    axios.post(endpointUrl, requestBody)
+                )
+            },
             fetchMyUser: () => {
                 var endpointUrl = this.url + "/users/me";
                 return (
@@ -94,6 +100,12 @@ class API {
                 var endpointUrl = this.url + "/books/" + id;
                 return (
                     axios.patch(endpointUrl, data)
+                )
+            },
+            deleteBook: (id) => {
+                var endpointUrl = this.url + "/books/" + id;
+                return (
+                    axios.delete(endpointUrl)
                 )
             },
             addBook: (data) => {

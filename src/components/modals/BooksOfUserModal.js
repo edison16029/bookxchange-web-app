@@ -16,7 +16,6 @@ const BooksOfUserModal = ({ showModal, setShowModal, userInfo, onBookOfOtherUser
         
       })
     }
-    console.log("Data : ", data);
     
     return(
       <Modal

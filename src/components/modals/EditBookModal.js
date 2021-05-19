@@ -1,9 +1,9 @@
 import React, { useEffect, useState} from 'react'
-import { Modal } from 'antd'
+import { Button, Modal } from 'antd'
 import '../../styles/modal.scss'
 import TextInput from '../presentationalComponents/TextInput'
 
-const EditBookModal = ({ onUpdateBook, showModal, setShowModal, bookInfo }) => {
+const EditBookModal = ({ onUpdateBook, onDeleteBook, showModal, setShowModal, bookInfo }) => {
     const [name, setName] = useState('');
     const [author, setAuthor] = useState('');
     const [link, setLink] = useState('');
@@ -43,6 +43,12 @@ const EditBookModal = ({ onUpdateBook, showModal, setShowModal, bookInfo }) => {
       setShowModal(false);
     }
 
+    const deleteBook = () => {
+      onDeleteBook({id: bookInfo._id});
+      clearState();
+      setShowModal(false);
+    }
+
     useEffect(() => {
       setState();
     },[bookInfo]);
@@ -53,15 +59,20 @@ const EditBookModal = ({ onUpdateBook, showModal, setShowModal, bookInfo }) => {
         centered
         bodyStyle = {{height: '300px'}}
         visible={showModal}
-        okText="Update Book"
         onOk={updateBook}
         onCancel={() => {
             setState();
             setShowModal(false)
           }
         }
-        okButtonProps={{style : { borderRadius : '10px'}}}
-        cancelButtonProps={{ style: { display: 'none' } }}
+        footer={[
+          <Button key="back" type="primary" onClick={updateBook} style={{ borderRadius : '10px'}}>
+            Update Book
+          </Button>,
+          <Button key="submit" type="primary" onClick={deleteBook} style={{ borderRadius : '10px'}}>
+            Delete Book
+          </Button>,
+        ]}
       >
         <div className = "modal-body-container">
           <TextInput label={"Name"} value={name} handleValueChange={handleNameChange}/>

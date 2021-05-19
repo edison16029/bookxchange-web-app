@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { Layout } from "./presentationalComponents/Layout";
+import Layout from "./presentationalComponents/Layout";
 import TabsContainer from './presentationalComponents/TabsContainer';
 import AccountTab from "./tabs/AccountTab";
 import YourBooksTab from "./tabs/YourBooksTab";
 import UpdateProfileModal from './modals/UpdateProfileModal';
 import AddBookModal from './modals/AddBookModal';
 import EditBookModal from './modals/EditBookModal';
-import { fetchMyAccountData, fetchBooksIOwn, updateMyAccountData, resetAccountInfo, resetBooksIOwnInfo, updateBookInfo, addBook } from "../redux/profileSlice";
+import { fetchMyAccountData, fetchBooksIOwn, updateMyAccountData, resetAccountInfo, resetBooksIOwnInfo, updateBookInfo, deleteBook, addBook } from "../redux/profileSlice";
 
 const Profile = props => {
   const {
@@ -18,6 +18,7 @@ const Profile = props => {
     updateMyAccountData,
     resetAccountInfo,
     updateBookInfo,
+    deleteBook,
     resetBooksIOwnInfo,
     addBook
   } = props;
@@ -49,7 +50,6 @@ const Profile = props => {
         accountInfo.push({title : profile.data.accountInfo.location})
         //For Displaying in the Modal to update the Account Info
         accountInfoData = profile.data.accountInfo;
-        console.log("accountInfoData : ", accountInfoData);
         //BooksIOwn data
         booksIOwn = profile.data.booksIOwn.map(book => {
               let bookIOwn = { ...book, title : book.name}
@@ -93,9 +93,15 @@ const Profile = props => {
     });
   }
 
+  const onDeleteBook = data => {
+    resetBooksIOwnInfo();
+    deleteBook(data).then(() => {
+      setpageLoad(pageLoad+1);
+    });
+  }
+
   const onAddBook = data => {
     resetBooksIOwnInfo();
-    console.log("Data for Adding Book ", data);
     addBook(data).then(() => {
       setpageLoad(pageLoad+1);
     });
@@ -110,7 +116,7 @@ const Profile = props => {
         rightTabText = "Your books"/>
       <UpdateProfileModal accountInfo={accountInfoData} onUpdateProfile={onUpdateProfile} showModal={showUpdateProfileModal} setShowModal={setShowUpdateProfileModal}/> 
       <AddBookModal onAddBook={onAddBook} showModal={showAddBookModal} setShowModal={setShowAddBookModal}/> 
-      <EditBookModal bookInfo={bookInfo} onUpdateBook={onUpdateBook} showModal={showEditBookModal} setShowModal={setShowEditBookModal}/> 
+      <EditBookModal bookInfo={bookInfo} onUpdateBook={onUpdateBook} onDeleteBook={onDeleteBook} showModal={showEditBookModal} setShowModal={setShowEditBookModal}/> 
     </Layout>
   )
 };
@@ -119,4 +125,4 @@ const mapStateToProps = state => ({
     profile : state.profile
 });
 
-export default connect(mapStateToProps, { fetchMyAccountData, fetchBooksIOwn, updateMyAccountData, resetAccountInfo, updateBookInfo, resetBooksIOwnInfo, addBook })(Profile);
+export default connect(mapStateToProps, { fetchMyAccountData, fetchBooksIOwn, updateMyAccountData, resetAccountInfo, updateBookInfo, deleteBook, resetBooksIOwnInfo, addBook })(Profile);

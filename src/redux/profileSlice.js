@@ -62,6 +62,21 @@ export const updateBookInfo = createAsyncThunk(
     }
   )
 
+export const deleteBook = createAsyncThunk(
+    'books/deleteBook',
+    (data, ThunkAPI) => {
+        const myApi = new API();
+        return myApi.endpoints.books.deleteBook(data.id)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            handleApiError(error);         
+            return ThunkAPI.rejectWithValue();       
+        });  
+    }
+  )
+
 export const addBook = createAsyncThunk(
     'books/addBook',
     (data, ThunkAPI) => {
@@ -89,6 +104,9 @@ const profileSlice = createSlice({
   reducers: {
         addMyAccountData(state, action) {
             state.data = action.payload;
+        },
+        updateNotifs(state, action){
+            state.data.notifications = action.payload;
         },
         resetAccountInfo(state) {
             state.data.accountInfo = {};
@@ -125,5 +143,5 @@ const profileSlice = createSlice({
     }
 })
 
-export const { addMyAccountData, resetAccountInfo, resetBooksIOwnInfo } = profileSlice.actions
+export const { addMyAccountData, updateNotifs, resetAccountInfo, resetBooksIOwnInfo } = profileSlice.actions
 export default profileSlice.reducer
