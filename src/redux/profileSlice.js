@@ -95,18 +95,20 @@ export const addBook = createAsyncThunk(
 const profileSlice = createSlice({
   name: 'profile',
   initialState: { 
-        data : {},
+        data : {
+            accountInfo: {
+                notifications: []
+            },
+            booksIOwn: []
+        },
         accountInfoError : false,
         booksIOwnError : false,
         myAccountStatus : "initial",
         booksIOwnStatus : "initial"
   },
   reducers: {
-        addMyAccountData(state, action) {
-            state.data = action.payload;
-        },
         updateNotifs(state, action){
-            state.data.notifications = action.payload;
+            state.data.accountInfo.notifications = action.payload;
         },
         resetAccountInfo(state) {
             state.data.accountInfo = {};
@@ -114,7 +116,7 @@ const profileSlice = createSlice({
             state.myAccountStatus = "initial";
         },
         resetBooksIOwnInfo(state) {
-            state.data.booksIOwn = {};
+            state.data.booksIOwn = [];
             state.booksIOwnError = false;
             state.booksIOwnStatus = "initial";
         }
@@ -136,12 +138,12 @@ const profileSlice = createSlice({
             state.booksIOwnStatus = "fetched";
         },
         [fetchBooksIOwn.rejected] : (state, action) => {
-            state.data.booksIOwn = {};
+            state.data.booksIOwn = [];
             state.booksIOwnError = true;
             state.booksIOwnStatus = "fetched";
         },
     }
 })
 
-export const { addMyAccountData, updateNotifs, resetAccountInfo, resetBooksIOwnInfo } = profileSlice.actions
+export const { updateNotifs, resetAccountInfo, resetBooksIOwnInfo } = profileSlice.actions
 export default profileSlice.reducer

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -7,6 +8,9 @@ import API from '../shared/api';
 import handleApiError from '../shared/errorhandler';
 import notifyUser from '../shared/Notification';
 import constants from '../shared/constants';
+import { fetchMyAccountData, fetchBooksIOwn } from "../redux/profileSlice";
+import { fetchBooks } from '../redux/booksSlice';
+import { fetchBooksILiked, fetchBooksOthersLiked } from "../redux/matchedBooksSlice";
 
 const Login = (props) => {
 
@@ -17,6 +21,14 @@ const Login = (props) => {
         )
     }
     */
+
+    const {
+        fetchMyAccountData,
+        fetchBooksIOwn,
+        fetchBooks,
+        fetchBooksILiked,
+        fetchBooksOthersLiked
+    } = props;
 
     const SigninStage = {
         SendOTP : 0,
@@ -54,6 +66,12 @@ const Login = (props) => {
         myApi.endpoints.users.verifyLogin(requestBody)
             .then(response => {
                 if(response.status === 200){
+                    //Fetching all the required data at login
+                    fetchMyAccountData();
+                    fetchBooksIOwn();
+                    fetchBooks();
+                    fetchBooksILiked();
+                    fetchBooksOthersLiked();
                     props.history.push(constants.routes.home);
                 }
                 else{
@@ -126,4 +144,10 @@ const Login = (props) => {
     );
 }
 
-export default Login;
+export default connect(null, {
+        fetchMyAccountData,
+        fetchBooksIOwn,
+        fetchBooks,
+        fetchBooksILiked,
+        fetchBooksOthersLiked
+    })(Login);

@@ -10,12 +10,10 @@ import { connect } from "react-redux";
 import { updateNotifs } from "../../redux/profileSlice";
 
 const mapStateToProps = (state) => ({
-  // notifications: state.profile.data.accountInfo.notifications,
-  // timestamp: state.profile.data.accountInfo.timestamp,
-  notifications: state.profile.data.notifications,
-  timestamp: state.profile.data.timestamp,
+  notifications: state.profile.data.accountInfo.notifications,
+  timestamp: state.profile.data.accountInfo.timestamp,
 });
-const readNotifs = (timestamp,update) => {
+const readNotifs = (timestamp,updateNotifs) => {
   const requestBody = {
     timestamp: timestamp,
   };
@@ -28,7 +26,7 @@ const readNotifs = (timestamp,update) => {
         "Notifications cleared!",
         "Notifications have been marked as read."
       );
-      update(response.data.data.newNotifications.notifications);
+      updateNotifs(response.data.data.newNotifications.notifications);
     })
     .catch((error) => {
       handleApiError(error);

@@ -80,7 +80,10 @@ export const likeBook = createAsyncThunk(
 const matchedBooksSlice = createSlice({
   name: 'matchedBooks',
   initialState: { 
-        data : {},
+        data : {
+            booksILiked: [],
+            booksOthersLiked: []
+        },
         booksILikedError : false,
         booksOthersLikedError: false,
         booksILikedStatus : "initial",
@@ -88,7 +91,7 @@ const matchedBooksSlice = createSlice({
   },
   reducers: {
         resetBooksILiked(state) {
-            state.data.booksILiked = {};
+            state.data.booksILiked = [];
             state.booksILikedError = false;
             state.booksILikedStatus = "initial";
         }
@@ -100,7 +103,7 @@ const matchedBooksSlice = createSlice({
             state.booksILikedStatus = "fetched";
         },
         [fetchBooksILiked.rejected] : (state, action) => {
-            state.data = {};
+            state.data.booksILiked = [];
             state.booksILikedError = true;
             state.booksILikedStatus = "fetched";
         },
@@ -110,7 +113,7 @@ const matchedBooksSlice = createSlice({
             state.booksOthersLikedStatus = "fetched";
         },
         [fetchBooksOthersLiked.rejected] : (state, action) => {
-            state.data = {};
+            state.data.booksOthersLiked = [];
             state.booksOthersLikedError = true;
             state.booksOthersLikedStatus = "fetched";
         }

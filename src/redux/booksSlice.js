@@ -20,7 +20,9 @@ export const fetchBooks = createAsyncThunk(
 const booksSlice = createSlice({
   name: 'books',
   initialState: { 
-        data : {},
+        data : {
+            nearbyBooks: []
+        },
         error : false,
         status : "initial"
   },
@@ -33,7 +35,7 @@ const booksSlice = createSlice({
             state.status = "fetched";
         },
         [fetchBooks.rejected] : (state, action) => {
-            state.data = {};
+            state.data.nearbyBooks = [];
             state.error = true;
             state.status = "fetched";
         }
