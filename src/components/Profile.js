@@ -8,6 +8,8 @@ import YourBooksTab from "./tabs/YourBooksTab";
 import UpdateProfileModal from './modals/UpdateProfileModal';
 import AddBookModal from './modals/AddBookModal';
 import EditBookModal from './modals/EditBookModal';
+import ErrorView from './presentationalComponents/ErrorView';
+import LoadingView from './presentationalComponents/LoadingView';
 import { fetchMyAccountData, fetchBooksIOwn, updateMyAccountData, resetAccountInfo, resetBooksIOwnInfo, updateBookInfo, deleteBook, addBook } from "../redux/profileSlice";
 
 const Profile = props => {
@@ -42,7 +44,7 @@ const Profile = props => {
  
   let accountInfo = [];
   let booksIOwn = [];
-  if(dataFetched){
+  if(dataFetched){ 
     if(!profile.accountInfoError && !profile.booksIOwnError){
         //AccountInfo data
         accountInfo.push({title : profile.data.accountInfo.name})
@@ -56,19 +58,18 @@ const Profile = props => {
               return bookIOwn;
             });
     }
-    else{ //TODO : Add Error Page here
+    else{
         return (
             <Layout>
-                ERRRRRRRRRRROR
+                <ErrorView />
             </Layout>
           ) 
     }
   }
   else{
-    //TODO : Add Loading Page here
     return (
       <Layout>
-            LOADINGG
+          <LoadingView />
       </Layout>
     ) 
   }

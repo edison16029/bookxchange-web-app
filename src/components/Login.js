@@ -14,14 +14,6 @@ import { fetchBooksILiked, fetchBooksOthersLiked } from "../redux/matchedBooksSl
 
 const Login = (props) => {
 
-    /* TODO : Automatically Redirect Logged in User
-    if(<condition></condition>){
-        return (
-            <Redirect to = "/browsebooks" />
-        )
-    }
-    */
-
     const {
         fetchMyAccountData,
         fetchBooksIOwn,

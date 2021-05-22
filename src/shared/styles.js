@@ -1,4 +1,3 @@
-//TODO : Refactor Navigation Bar to not use the following object
 export const appColours = {
     primary : "#022C43",
     lighter_primary : "#053F5E",

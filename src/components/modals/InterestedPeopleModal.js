@@ -4,7 +4,6 @@ import { Modal } from 'antd'
 import '../../styles/modal.scss'
 import TextInputDisabled from '../presentationalComponents/TextInputDisabled'
 import ModalListView from '../presentationalComponents/ModalListView';
-//TODO : Edit this
 const InterestedPeopleModal = ({ showModal, setShowModal, bookInfo, onInterestedUserClick }) => {
 
     const removeBook = () => {

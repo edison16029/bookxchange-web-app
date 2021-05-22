@@ -37,12 +37,6 @@ const Layout = (props) => {
   let newNotifs = notifications === undefined ? [] : notifications;
   const menu = (
     <Menu>
-      {newNotifs.length !== 0 ? (
-        <Button onClick={() => readNotifs(timestamp,updateNotifs)}>Mark as Read</Button>
-      ) : (
-        <Button disabled>Mark as Read</Button>
-      )}
-
       <Menu.ItemGroup title="Notifications">
         {newNotifs.length !== 0 ? (
           notifications.map((value) => <Menu.Item>{value.text}</Menu.Item>)
@@ -50,6 +44,9 @@ const Layout = (props) => {
           <div>No New Notifications</div>
         )}
       </Menu.ItemGroup>
+      {newNotifs.length !== 0 ? (
+        <Button type="secondary" style={{backgroundColor : '#115173', color: 'white'}} onClick={() => readNotifs(timestamp,updateNotifs)}>Mark as Read</Button>
+      ) : null}
     </Menu>
   );
 

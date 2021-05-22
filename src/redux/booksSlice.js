@@ -27,6 +27,10 @@ const booksSlice = createSlice({
         status : "initial"
   },
   reducers: {
+        removeLikedBook(state,action) {
+            let index = state.data.nearbyBooks.findIndex(book => book.id === action.payload);
+            state.data.nearbyBooks.splice(index, 1);
+        }
     },
     extraReducers : {
         [fetchBooks.fulfilled] : (state, action) => {
@@ -42,4 +46,5 @@ const booksSlice = createSlice({
     }
 })
 
+export const { removeLikedBook } = booksSlice.actions;
 export default booksSlice.reducer

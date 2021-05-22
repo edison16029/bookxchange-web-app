@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { Spin } from 'antd'
+
 import  Layout  from "./presentationalComponents/Layout";
 import TabsContainer from './presentationalComponents/TabsContainer';
 import BooksILikedTab from "./tabs/BooksILikedTab";
@@ -7,6 +9,8 @@ import BooksOthersLikedTab from "./tabs/BooksOthersLikedTab";
 import BookDetailsModal from './modals/BookDetailsModal';
 import InterestedPeopleModal from './modals/InterestedPeopleModal';
 import BooksOfUserModal from './modals/BooksOfUserModal';
+import ErrorView from './presentationalComponents/ErrorView';
+import LoadingView from './presentationalComponents/LoadingView';
 
 import { fetchBooksILiked, fetchBooksOthersLiked, fetchUserById, resetBooksILiked, unlikeBook, likeBook } from "../redux/matchedBooksSlice";
 
@@ -28,6 +32,7 @@ const MatchedBooks = props => {
   const [bookOtherLikedInfo, setBookOtherLikedInfo] = useState({});
   const [userInfo, setUserInfo] = useState({});
   const [isBookILikedTab, SetIsBookILikedTab] = useState(true);
+  const [showSpinner, SetShowSpinner] = useState(false);
 
   // eslint-disable-next-line
   const [pageLoad, setpageLoad] = useState(0);
@@ -52,19 +57,18 @@ const MatchedBooks = props => {
         return bookOthersLiked;
       })
     }
-    else{ //TODO : Add Error Page here
+    else{
         return (
             <Layout>
-                ERRRRRRRRRRROR
+                <ErrorView />
             </Layout>
           ) 
     }
   }
   else{
-    //TODO : Add Loading Page here
     return (
       <Layout>
-          LOADINGG
+          <LoadingView />
       </Layout>
     ) 
   }
@@ -72,9 +76,9 @@ const MatchedBooks = props => {
   const onBookILikedItemClick = bookId => {
     SetIsBookILikedTab(true);
     let chosenBook = booksILiked.filter(book => book._id === bookId)[0];
-    //TODO : Spinner On
+    SetShowSpinner(true);
     fetchUserById(chosenBook.owner).then(response => {
-      //TODO : Spinner Off
+      SetShowSpinner(false);
       chosenBook.ownerName = response.payload.data.user.name;
       setBookInfo(chosenBook);
       setShowBookDetailsModal(true);
@@ -97,9 +101,9 @@ const MatchedBooks = props => {
 
   const onInterestedUserClick = item => {
     setShowInterestedPeopleModal(false);
-    //TODO : Spinner On
+    SetShowSpinner(true);
     fetchUserById(item._id).then(response => {
-      //TODO : Spinner Off
+      SetShowSpinner(false);
       let userInfoObject = {}
       userInfoObject.name = response.payload.data.user.name;
       userInfoObject.booksOwned = response.payload.data.user.booksOwned;
@@ -135,7 +139,9 @@ const MatchedBooks = props => {
         <BookDetailsModal bookInfo={bookInfo} onOk={isBookILikedTab ? onUnlikeBook : onLikeBook} okayButtonText={isBookILikedTab ? "Unlike Book" : "Like Book"} showModal={showBookDetailsModal} setShowModal={setShowBookDetailsModal}/>
         <InterestedPeopleModal bookInfo={bookOtherLikedInfo} onInterestedUserClick={onInterestedUserClick} showModal={showInterestedPeopleModal} setShowModal={setShowInterestedPeopleModal}/>
         <BooksOfUserModal userInfo={userInfo} showModal={showBooksOfUserModal} onBookOfOtherUserClick={onBookOfOtherUserClick} setShowModal={setShowBooksOfUserModal}/>
-
+        <div style={{position: 'absolute', top: '50vh', left: '50vw', right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
+          <Spin size="large" spinning={showSpinner}/>
+        </div>
     </Layout>
   )
 };
