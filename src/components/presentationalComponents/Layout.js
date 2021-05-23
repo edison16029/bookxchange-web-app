@@ -1,19 +1,20 @@
 import React from "react";
 import { Menu, Dropdown, Button } from "antd";
 import { BellFilled } from "@ant-design/icons";
+import "../../styles/styles.scss";
 import "../../styles/layout.scss";
 import "../../styles/ant.scss";
 import API from "../../shared/api";
 import handleApiError from "../../shared/errorhandler";
 import notifyUser from "../../shared/Notification";
 import { connect } from "react-redux";
-import { updateNotifs } from "../../redux/myAccountSlice";
+import { updateNotifs } from "../../redux/profileSlice";
 
 const mapStateToProps = (state) => ({
-  notifications: state.myAccount.data.notifications,
-  timestamp: state.myAccount.data.timestamp,
+  notifications: state.profile.data.accountInfo.notifications,
+  timestamp: state.profile.data.accountInfo.timestamp,
 });
-const readNotifs = (timestamp,update) => {
+const readNotifs = (timestamp,updateNotifs) => {
   const requestBody = {
     timestamp: timestamp,
   };
@@ -26,32 +27,27 @@ const readNotifs = (timestamp,update) => {
         "Notifications cleared!",
         "Notifications have been marked as read."
       );
-      update(response.data.data.newNotifications.notifications);
+      updateNotifs(response.data.data.newNotifications.notifications);
     })
     .catch((error) => {
-      console.log(error)
       handleApiError(error);
     });
 };
 const Layout = (props) => {
   const { notifications, timestamp,updateNotifs } = props;
-  console.log(props);
   let newNotifs = notifications === undefined ? [] : notifications;
   const menu = (
     <Menu>
-      {newNotifs.length !== 0 ? (
-        <Button onClick={() => readNotifs(timestamp,updateNotifs)}>Mark as Read</Button>
-      ) : (
-        <Button disabled>Mark as Read</Button>
-      )}
-
       <Menu.ItemGroup title="Notifications">
         {newNotifs.length !== 0 ? (
-          notifications.map((value) => <Menu.Item>{value.text}</Menu.Item>)
+          notifications.map((value, index) => <Menu.Item key={index}>{value.text}</Menu.Item>)
         ) : (
-          <div>No New Notifications</div>
+          <Menu.Item>{"No New Notifications"}</Menu.Item>
         )}
       </Menu.ItemGroup>
+      {newNotifs.length !== 0 ? (
+        <Button type="secondary" style={{backgroundColor : '#115173', color: 'white'}} onClick={() => readNotifs(timestamp,updateNotifs)}>Mark as Read</Button>
+      ) : null}
     </Menu>
   );
 
@@ -63,7 +59,7 @@ const Layout = (props) => {
       </div>
       <div className="mini-container">
         <div className="notification-container">
-          <Dropdown overlay={menu}>
+          <Dropdown overlay={menu} className="cursor-pointer">
             <BellFilled className="notification" />
           </Dropdown>
         </div>

@@ -11,7 +11,6 @@ import constants from '../shared/constants';
 import '../styles/home.scss';
 
 const Home = () => {
-    //TODO : Add Error Component    
     return (
         <React.Fragment>
             <Router>

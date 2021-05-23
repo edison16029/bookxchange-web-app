@@ -20,11 +20,17 @@ export const fetchBooks = createAsyncThunk(
 const booksSlice = createSlice({
   name: 'books',
   initialState: { 
-        data : {},
+        data : {
+            nearbyBooks: []
+        },
         error : false,
         status : "initial"
   },
   reducers: {
+        removeLikedBook(state,action) {
+            let index = state.data.nearbyBooks.findIndex(book => book.id === action.payload);
+            state.data.nearbyBooks.splice(index, 1);
+        }
     },
     extraReducers : {
         [fetchBooks.fulfilled] : (state, action) => {
@@ -33,11 +39,12 @@ const booksSlice = createSlice({
             state.status = "fetched";
         },
         [fetchBooks.rejected] : (state, action) => {
-            state.data = {};
+            state.data.nearbyBooks = [];
             state.error = true;
             state.status = "fetched";
         }
     }
 })
 
+export const { removeLikedBook } = booksSlice.actions;
 export default booksSlice.reducer

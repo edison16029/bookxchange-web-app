@@ -47,6 +47,22 @@ class API {
                 return (
                     axios.get(endpointUrl, {})
                 )
+            },
+            updateMyUser: (name, location) => {
+                var endpointUrl = this.url + "/users/me";
+                let body = {
+                    name: name,
+                    location: location
+                }
+                return (
+                    axios.patch(endpointUrl, body)
+                )
+            },
+            fetchUserById: id => {
+                var endpointUrl = this.url + "/users/" + id;
+                return (
+                    axios.get(endpointUrl, {})
+                )
             }
         };
         this.endpoints['books'] = {
@@ -73,7 +89,37 @@ class API {
                 return (
                     axios.get(endpointUrl, {})
                 )
-            }
+            },
+            fetchBooksIOwn: () => {
+                var endpointUrl = this.url + "/books/owned";
+                return (
+                    axios.get(endpointUrl, {})
+                )
+            },
+            updateBook: (id, data) => {
+                var endpointUrl = this.url + "/books/" + id;
+                return (
+                    axios.patch(endpointUrl, data)
+                )
+            },
+            deleteBook: (id) => {
+                var endpointUrl = this.url + "/books/" + id;
+                return (
+                    axios.delete(endpointUrl)
+                )
+            },
+            addBook: (data) => {
+                var endpointUrl = this.url + "/books";
+                return (
+                    axios.post(endpointUrl, data)
+                )
+            },
+            unlikeBook: (id) => {
+                var endpointUrl = this.url + "/books/" + id + "/like";
+                return (
+                    axios.delete(endpointUrl, {})
+                )
+            },
         }
     }
 }
