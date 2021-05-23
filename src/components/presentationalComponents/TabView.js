@@ -16,7 +16,7 @@ const TabView = (props) => {
     
     const itemList = data.slice(startIndex, startIndex + numberOfBooksPerPage).map(item => {
         return(
-          <TextItem id={item._id} text={item.title} itemOnClick={itemOnClick}/>
+          <TextItem key={item._id} id={item._id} text={item.title} itemOnClick={itemOnClick}/>
         )
     });
 

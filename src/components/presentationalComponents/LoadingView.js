@@ -1,4 +1,3 @@
-import { Spin } from 'antd';
 import React from 'react'
 import '../../styles/loadingView.scss';
 import Spinner from './Spinner';

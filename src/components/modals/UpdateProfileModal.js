@@ -15,10 +15,10 @@ const UpdateProfileModal = ({ onUpdateProfile, showModal, setShowModal, accountI
       setAddress(event.target.value)
     }
 
-    const setState = () => {
+    const setState = React.useCallback(() => {
       setName(accountInfo.name);
       setAddress(accountInfo.location);
-    }
+    }, [accountInfo]);
 
     const clearState = () => {
       setName('');
@@ -33,7 +33,7 @@ const UpdateProfileModal = ({ onUpdateProfile, showModal, setShowModal, accountI
 
     useEffect(() => {
       setState();
-    },[accountInfo]);
+    },[accountInfo, setState]);
     
     return(
       <Modal

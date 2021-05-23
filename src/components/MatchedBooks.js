@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Spin } from 'antd'
-
 import  Layout  from "./presentationalComponents/Layout";
 import TabsContainer from './presentationalComponents/TabsContainer';
 import BooksILikedTab from "./tabs/BooksILikedTab";

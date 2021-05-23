@@ -20,11 +20,11 @@ const EditBookModal = ({ onUpdateBook, onDeleteBook, showModal, setShowModal, bo
         setLink(event.target.value)
     }
     
-    const setState = () => {
+    const setState = React.useCallback(() => {
       setName(bookInfo.name);
       setAuthor(bookInfo.author);
       setLink(bookInfo.link);
-    }
+    }, [bookInfo] );
 
     const clearState = () => {
       setName('');
@@ -51,10 +51,10 @@ const EditBookModal = ({ onUpdateBook, onDeleteBook, showModal, setShowModal, bo
 
     useEffect(() => {
       setState();
-    },[bookInfo]);
+    },[bookInfo, setState]);
     
     return(
-      <Modal
+      <Modal  
         title="Edit Book"
         centered
         bodyStyle = {{height: '300px'}}

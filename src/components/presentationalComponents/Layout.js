@@ -40,9 +40,9 @@ const Layout = (props) => {
     <Menu>
       <Menu.ItemGroup title="Notifications">
         {newNotifs.length !== 0 ? (
-          notifications.map((value) => <Menu.Item>{value.text}</Menu.Item>)
+          notifications.map((value, index) => <Menu.Item key={index}>{value.text}</Menu.Item>)
         ) : (
-          <div>No New Notifications</div>
+          <Menu.Item>{"No New Notifications"}</Menu.Item>
         )}
       </Menu.ItemGroup>
       {newNotifs.length !== 0 ? (
