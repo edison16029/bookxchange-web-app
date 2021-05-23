@@ -10,6 +10,8 @@ import AddBookModal from './modals/AddBookModal';
 import EditBookModal from './modals/EditBookModal';
 import ErrorView from './presentationalComponents/ErrorView';
 import LoadingView from './presentationalComponents/LoadingView';
+import Spinner from './presentationalComponents/Spinner';
+
 import { fetchMyAccountData, fetchBooksIOwn, updateMyAccountData, resetAccountInfo, resetBooksIOwnInfo, updateBookInfo, deleteBook, addBook } from "../redux/profileSlice";
 
 const Profile = props => {
@@ -29,6 +31,7 @@ const Profile = props => {
   const [showAddBookModal, setShowAddBookModal] = useState(false);
   const [showEditBookModal, setShowEditBookModal] = useState(false);
   const [bookInfo, setBookInfo] = useState({});
+  const [showSpinner, SetShowSpinner] = useState(false);
 
   // eslint-disable-next-line
   const [pageLoad, setpageLoad] = useState(0);
@@ -75,9 +78,11 @@ const Profile = props => {
   }
 
   const onYourBookItemClick = bookId => {
+    SetShowSpinner(true);
     let chosenBook = booksIOwn.filter(book => book._id === bookId)[0];
     setBookInfo(chosenBook);
     setShowEditBookModal(true);
+    SetShowSpinner(false);
   }
 
   const onUpdateProfile = data => {
@@ -118,6 +123,7 @@ const Profile = props => {
       <UpdateProfileModal accountInfo={accountInfoData} onUpdateProfile={onUpdateProfile} showModal={showUpdateProfileModal} setShowModal={setShowUpdateProfileModal}/> 
       <AddBookModal onAddBook={onAddBook} showModal={showAddBookModal} setShowModal={setShowAddBookModal}/> 
       <EditBookModal bookInfo={bookInfo} onUpdateBook={onUpdateBook} onDeleteBook={onDeleteBook} showModal={showEditBookModal} setShowModal={setShowEditBookModal}/> 
+      <Spinner showSpinner={showSpinner}/>
     </Layout>
   )
 };

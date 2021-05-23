@@ -11,7 +11,7 @@ import InterestedPeopleModal from './modals/InterestedPeopleModal';
 import BooksOfUserModal from './modals/BooksOfUserModal';
 import ErrorView from './presentationalComponents/ErrorView';
 import LoadingView from './presentationalComponents/LoadingView';
-
+import Spinner from './presentationalComponents/Spinner';
 import { fetchBooksILiked, fetchBooksOthersLiked, fetchUserById, resetBooksILiked, unlikeBook, likeBook } from "../redux/matchedBooksSlice";
 
 const MatchedBooks = props => {
@@ -139,9 +139,7 @@ const MatchedBooks = props => {
         <BookDetailsModal bookInfo={bookInfo} onOk={isBookILikedTab ? onUnlikeBook : onLikeBook} okayButtonText={isBookILikedTab ? "Unlike Book" : "Like Book"} showModal={showBookDetailsModal} setShowModal={setShowBookDetailsModal}/>
         <InterestedPeopleModal bookInfo={bookOtherLikedInfo} onInterestedUserClick={onInterestedUserClick} showModal={showInterestedPeopleModal} setShowModal={setShowInterestedPeopleModal}/>
         <BooksOfUserModal userInfo={userInfo} showModal={showBooksOfUserModal} onBookOfOtherUserClick={onBookOfOtherUserClick} setShowModal={setShowBooksOfUserModal}/>
-        <div style={{position: 'absolute', top: '50vh', left: '50vw', right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-          <Spin size="large" spinning={showSpinner}/>
-        </div>
+        <Spinner showSpinner={showSpinner}/>
     </Layout>
   )
 };

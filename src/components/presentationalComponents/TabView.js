@@ -23,7 +23,7 @@ const TabView = (props) => {
     return (
         <div className="tab-container">
           <div className="tab-header-container text-align-center padding-vertical-medium">
-            <span className="font-style">{title}</span>
+            <span className="big-font">{title}</span>
           </div>
           <div className="tab-list-container">
             {itemList}

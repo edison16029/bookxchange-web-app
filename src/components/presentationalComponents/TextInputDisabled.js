@@ -3,9 +3,16 @@ import '../../styles/styles.scss'
 import '../../styles/textinput.scss';
 const TextInputDisabled = ({label, value, item, centeredText, itemOnClick}) => {
 
-    let className = "text-input text-input-disable ";
+    let classNames = "text-input text-input-disable ";
+    if(itemOnClick){
+        classNames+= "pointer-cursor ";
+    }
+    else{
+        classNames+= "text-cursor ";
+    }
+
     if(centeredText){
-        className += "text-align-center";
+        classNames += "text-align-center";
     }
 
     const handleOnClick = () => {
@@ -16,7 +23,7 @@ const TextInputDisabled = ({label, value, item, centeredText, itemOnClick}) => {
     return (
         <div className = "text-input-container" onClick={handleOnClick}>
             <span className="text-input-label">{label}</span>
-            <input type="text" value={value} disabled maxLength={150} className={className}/>
+            <input type="text" value={value} disabled maxLength={150} className={classNames}/>
         </div>
     )
 }

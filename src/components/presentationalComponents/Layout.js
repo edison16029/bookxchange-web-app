@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, Dropdown, Button } from "antd";
 import { BellFilled } from "@ant-design/icons";
+import "../../styles/styles.scss";
 import "../../styles/layout.scss";
 import "../../styles/ant.scss";
 import API from "../../shared/api";
@@ -58,7 +59,7 @@ const Layout = (props) => {
       </div>
       <div className="mini-container">
         <div className="notification-container">
-          <Dropdown overlay={menu}>
+          <Dropdown overlay={menu} className="cursor-pointer">
             <BellFilled className="notification" />
           </Dropdown>
         </div>

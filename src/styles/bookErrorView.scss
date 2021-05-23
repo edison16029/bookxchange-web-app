@@ -11,11 +11,13 @@
     }
 
     .error-book-bg {
-        height: 50%;
         width: 100%;
-        background-image : url(errorBook.png);
+        height: 100%;
+        z-index: 1;
+        background-image : url(errorBook.svg);
         background-repeat: no-repeat;
         background-position: center;
+        background-size: 30%;
     }
 
 }

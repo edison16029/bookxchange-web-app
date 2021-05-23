@@ -10,6 +10,7 @@ import handleApiError from '../shared/errorhandler';
 import notifyUser from '../shared/Notification';
 import LoadingView from './presentationalComponents/LoadingView';
 import ErrorView from './presentationalComponents/ErrorView';
+import Spinner from './presentationalComponents/Spinner';
 
 import '../styles/browsebooks.scss';
 
@@ -85,9 +86,7 @@ const BrowseBooks = ({fetchBooks, books, removeLikedBook}) => {
                     <Pagination current={currentPage} total={nearbyBooks.length} pageSize={numberOfBooksPerPage} onChange = {onPageChange} />
                 </div>
             </div>
-            <div style={{position: 'absolute', top: '50vh', left: '50vw', right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
-                <Spin size="large" spinning={showSpinner}/>
-            </div>
+            <Spinner showSpinner={showSpinner}/>
         </Layout>
     )
 }
