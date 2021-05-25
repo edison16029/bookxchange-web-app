@@ -4,6 +4,11 @@ import { withRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { appColours } from '../../shared/styles';
 import '../../styles/navigationbar.scss';
+import {Button} from "antd"
+import API from '../../shared/api';
+import handleApiError from '../../shared/errorhandler';
+import notifyUser from '../../shared/Notification';
+import { LogoutOutlined} from '@ant-design/icons';
 import constants from '../../shared/constants';
 const NavigationBarComponent = (props) => {
 
@@ -27,6 +32,18 @@ const NavigationBarComponent = (props) => {
             <div></div>
         )
     }
+    const handleLogout =()=>{
+        const myApi = new API();
+        myApi.endpoints.users.logout()
+        .then(response => {
+            notifyUser("success", "Logged Out", "You have been logged out successfully.");
+            props.history.push('/')
+        })
+        .catch(error => {
+            handleApiError(error);  
+        });
+        
+    }
     return (
         <div className = "navbar-container">
             <Navbar collapseOnSelect expand="lg" >
@@ -46,6 +63,7 @@ const NavigationBarComponent = (props) => {
                             Matched Books
                         </Nav.Link>
                     </Nav>
+                    <Button onClick={handleLogout} icon={<LogoutOutlined />} />
                 </Navbar.Collapse>
             </Navbar>
         </div>

@@ -63,6 +63,12 @@ class API {
                 return (
                     axios.get(endpointUrl, {})
                 )
+            },
+            logout: () => {
+                var endpointUrl = this.url + "/users/logout";
+                return (
+                    axios.get(endpointUrl, {})
+                )
             }
         };
         this.endpoints['books'] = {
