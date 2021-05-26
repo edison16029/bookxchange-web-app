@@ -4,7 +4,7 @@ axios.defaults.withCredentials = true
 
 class API {
     constructor() {
-        this.url = "http://localhost:3000/api/v1";
+        this.url = `http://${process.env.REACT_APP_SERVER}/api/v1`;
         this.endpoints = {};
         this.createUserEndpoint();
     }
@@ -60,6 +60,12 @@ class API {
             },
             fetchUserById: id => {
                 var endpointUrl = this.url + "/users/" + id;
+                return (
+                    axios.get(endpointUrl, {})
+                )
+            },
+            logout: () => {
+                var endpointUrl = this.url + "/users/logout";
                 return (
                     axios.get(endpointUrl, {})
                 )
