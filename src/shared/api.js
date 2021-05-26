@@ -4,7 +4,8 @@ axios.defaults.withCredentials = true
 
 class API {
     constructor() {
-        this.url = "http://localhost:3000/api/v1";
+        var serverIp = process.env.REACT_APP_SERVER;
+        this.url = `http://${serverIp}/api/v1`;
         this.endpoints = {};
         this.createUserEndpoint();
     }
