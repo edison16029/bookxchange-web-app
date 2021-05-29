@@ -50,7 +50,7 @@ const Signup = (props) => {
         myApi.endpoints.users.verifySignup(requestBody)
             .then(response => {
                 if(response.status === 200){
-                    props.history.push(constants.routes.home);
+                    props.history.push(constants.routes.signin);
                 }
                 else{
                     notifyUser("error", "Error", "Error Occured while signing in. Try again."); //ideally, this should be unreachable.
