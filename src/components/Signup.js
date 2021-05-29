@@ -15,6 +15,7 @@ const Signup = (props) => {
         VerifyOTP : 1
     }
     const [username, setUserame] = useState("");
+    const [location, setLocation] = useState("");
     const [email, setEmail] = useState("");
     const [otp, setOTP] = useState("");
     const [signinStage, setSigninStage] = useState(SigninStage.SendOTP);
@@ -26,7 +27,8 @@ const Signup = (props) => {
     const sendOTP = () => {
         const requestBody = {
             "name" : username, 
-            "email" : email
+            "email" : email,
+            "location":location
         }
         const myApi = new API();
         myApi.endpoints.users.signup(requestBody)
@@ -96,6 +98,15 @@ const Signup = (props) => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group size="lg" controlId="location">
+                            <Form.Label>Location</Form.Label>
+                            <Form.Control
+                                type="number"
+                                pattern="\d{6}"
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
                             />
                         </Form.Group>
                         <Form.Group size="lg" controlId="otp" >

@@ -22,7 +22,7 @@
   "scripts": {
     "start-windows":"set PORT=3006 && react-scripts start ",
     "start": "REACT_APP_SERVER=localhost:3000 PORT=3006 react-scripts start ",
-    "build": "react-scripts build",
+    "build": "REACT_APP_SERVER=13.233.89.150 react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
