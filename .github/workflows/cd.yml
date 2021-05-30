@@ -19,7 +19,7 @@ jobs:
         appname: ["bxc-web-app"]
         deploy-group: ["web-app-staging"]
         s3-bucket: ["aws-bxc-deployments"]
-        s3-filename: ["staging-aws-bxc-web-app-${{ github.sha }}"]
+        s3-filename: ["staging-aws-bxc-web-app"]
 
     steps:
       - uses: actions/checkout@v2
