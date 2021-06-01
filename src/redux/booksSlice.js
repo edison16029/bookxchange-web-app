@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import API from '../shared/api';
+import constants from './../shared/constants'
 import handleApiError from '../shared/errorhandler';
 
 export const fetchBooks = createAsyncThunk(
     'books/fetchBooks',
     (data, ThunkAPI) => {
         const myApi = new API();
-        return myApi.endpoints.books.fetchNearbyBooks()
+        return myApi.endpoints.books.fetchNearbyBooks(constants.findBooksDistance)
         .then(response => {
             return response.data;
         })

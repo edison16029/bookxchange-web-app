@@ -10,9 +10,9 @@ import notifyUser from "../shared/Notification";
 import LoadingView from "./presentationalComponents/LoadingView";
 import ErrorView from "./presentationalComponents/ErrorView";
 import Spinner from "./presentationalComponents/Spinner";
-import { Select } from "antd";
+import { Slider, Typography, Row } from "antd";
 import "../styles/browsebooks.scss";
-const { Option } = Select;
+const { Text } = Typography;
 
 const mapDispatchToProps = { fetchBooks, removeLikedBook, updateBooks };
 
@@ -20,12 +20,9 @@ const mapStateToProps = (state) => ({
   books: state.books,
 });
 const BrowseBooks = ({ fetchBooks, books, removeLikedBook, updateBooks }) => {
-  const distance = [];
-  for (let i = 1; i <= 10; i++) {
-    distance.push(<Option key={i}>{i} kms</Option>);
-  }
   useEffect(fetchBooks, [fetchBooks]);
 
+  const [inputValue, setinputValue] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   const [showSpinner, SetShowSpinner] = useState(false);
 
@@ -33,6 +30,7 @@ const BrowseBooks = ({ fetchBooks, books, removeLikedBook, updateBooks }) => {
     setCurrentPage(pageNumber);
   };
   const onDistanceChange = (distance) => {
+    setinputValue(distance);
     SetShowSpinner(true);
     const myApi = new API();
     return myApi.endpoints.books
@@ -98,16 +96,16 @@ const BrowseBooks = ({ fetchBooks, books, removeLikedBook, updateBooks }) => {
     <Layout>
       <div className="browsebooks-root-container">
         <div className="select-container">
-          <Select
-            placeholder="Select distance"
-            className="select"
+          <Row justify="end"><div className="text"><Text>Distance</Text></div>
+          <Slider
+            min={1}
+            max={10}
             onChange={onDistanceChange}
-            style={{ width: "200px" }}
-          >
-            {distance}
-          </Select>
+            style={{width:300}}
+            value={typeof inputValue === "number" ? inputValue : 3}
+          /></Row>
+          
         </div>
-
         <div className="books-container">{booksList}</div>
         <div className="pagination-container">
           <Pagination
