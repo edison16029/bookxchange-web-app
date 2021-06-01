@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Menu, Dropdown, Button } from "antd";
 import { BellFilled } from "@ant-design/icons";
 import "../../styles/styles.scss";
@@ -7,6 +7,7 @@ import "../../styles/ant.scss";
 import API from "../../shared/api";
 import handleApiError from "../../shared/errorhandler";
 import notifyUser from "../../shared/Notification";
+import BooksOfUserModal from "./../modals/BooksOfUserModal";
 import { connect } from "react-redux";
 import { updateNotifs } from "../../redux/profileSlice";
 
@@ -14,7 +15,7 @@ const mapStateToProps = (state) => ({
   notifications: state.profile.data.accountInfo.notifications,
   timestamp: state.profile.data.accountInfo.timestamp,
 });
-const readNotifs = (timestamp,updateNotifs) => {
+const readNotifs = (timestamp, updateNotifs) => {
   const requestBody = {
     timestamp: timestamp,
   };
@@ -33,20 +34,48 @@ const readNotifs = (timestamp,updateNotifs) => {
       handleApiError(error);
     });
 };
+
 const Layout = (props) => {
-  const { notifications, timestamp,updateNotifs } = props;
+  const { notifications, timestamp, updateNotifs } = props;
+  const [modal, setModal] = useState(false);
+  const [userInfo, setUserInfo] = useState([]);
   let newNotifs = notifications === undefined ? [] : notifications;
+  const onNotificationClick = ({ item, key }) => {
+    var email = item.props.children[1].match(/\((.*)\)/);
+    if (email !== null) {
+      window.location.href = `mailto:${email[1]}?subject=Exchanging%20Books`;
+    } else {
+      const myApi = new API();
+      myApi.endpoints.users
+        .fetchUserById(key)
+        .then((response) => {
+          setUserInfo(response.data.data.user);
+        })
+        .catch((error) => {
+          handleApiError(error);
+        });
+      setModal(true);
+    }
+  };
   const menu = (
-    <Menu>
+    <Menu onClick={onNotificationClick}>
       <Menu.ItemGroup title="Notifications">
         {newNotifs.length !== 0 ? (
-          notifications.map((value, index) => <Menu.Item key={index}>{value.text}</Menu.Item>)
+          notifications.map((value) => (
+            <Menu.Item key={value.userId}>{value.text}</Menu.Item>
+          ))
         ) : (
           <Menu.Item>{"No New Notifications"}</Menu.Item>
         )}
       </Menu.ItemGroup>
       {newNotifs.length !== 0 ? (
-        <Button type="secondary" style={{backgroundColor : '#115173', color: 'white'}} onClick={() => readNotifs(timestamp,updateNotifs)}>Mark as Read</Button>
+        <Button
+          type="secondary"
+          style={{ backgroundColor: "#115173", color: "white" }}
+          onClick={() => readNotifs(timestamp, updateNotifs)}
+        >
+          Mark as Read
+        </Button>
       ) : null}
     </Menu>
   );
@@ -62,9 +91,14 @@ const Layout = (props) => {
           <Dropdown overlay={menu} className="cursor-pointer">
             <BellFilled className="notification" />
           </Dropdown>
+          <BooksOfUserModal
+            showModal={modal}
+            userInfo={userInfo}
+            setShowModal={setModal}
+          ></BooksOfUserModal>
         </div>
       </div>
     </div>
   );
 };
-export default connect(mapStateToProps, { updateNotifs})(Layout);
+export default connect(mapStateToProps, { updateNotifs })(Layout);
