@@ -11,7 +11,8 @@
     margin: 10px;
   }
   .notification-container {
-  text-align:end;
+    text-align: end;
+    margin: 15px;
   }
   .ant-dropdown-menu {
     background-color: $secondary;
@@ -71,7 +72,7 @@
     font-weight: 500;
     font-size: 24px;
   }
-  .modal-container{
+  .modal-container {
     height: max-content;
   }
   .ant-modal-content {
@@ -82,16 +83,16 @@
     border-top: 0px;
   }
   .ant-modal-close {
-    color:$white;
+    color: $white;
   }
   .ant-btn-primary {
-    color:$black;
+    color: $black;
     background: $secondary;
     border-color: $secondary;
   }
   .ant-btn-primary:hover,
   .ant-btn-primary:focus {
-    color:$black;
+    color: $black;
     background: #ccac00;
     border-color: #ccac00;
   }
@@ -123,10 +124,7 @@
     font-size: 120%;
     color: $white;
   }
-  .align-center
-  {
+  .align-center {
     text-align: center;
   }
-
-
 }
