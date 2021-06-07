@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import { Menu, Dropdown, Button } from "antd";
 import { BellFilled } from "@ant-design/icons";
 import "../../styles/styles.scss";
@@ -7,7 +8,6 @@ import "../../styles/ant.scss";
 import API from "../../shared/api";
 import handleApiError from "../../shared/errorhandler";
 import notifyUser from "../../shared/Notification";
-import BooksOfUserModal from "./../modals/BooksOfUserModal";
 import { connect } from "react-redux";
 import { updateNotifs } from "../../redux/profileSlice";
 
@@ -37,26 +37,17 @@ const readNotifs = (timestamp, updateNotifs) => {
 
 const Layout = (props) => {
   const { notifications, timestamp, updateNotifs } = props;
-  const [modal, setModal] = useState(false);
-  const [userInfo, setUserInfo] = useState([]);
   let newNotifs = notifications === undefined ? [] : notifications;
+  let history = useHistory();
   const onNotificationClick = ({ item, key }) => {
     var email = item.props.children[1].match(/\((.*)\)/);
     if (email !== null) {
       window.location.href = `mailto:${email[1]}?subject=Exchanging%20Books`;
     } else {
-      const myApi = new API();
-      myApi.endpoints.users
-        .fetchUserById(key)
-        .then((response) => {
-          setUserInfo(response.data.data.user);
-        })
-        .catch((error) => {
-          handleApiError(error);
-        });
-      setModal(true);
+      history.push("/matchedbooks");
     }
   };
+
   const menu = (
     <Menu onClick={onNotificationClick}>
       <Menu.ItemGroup title="Notifications">
@@ -91,11 +82,6 @@ const Layout = (props) => {
           <Dropdown overlay={menu} className="cursor-pointer">
             <BellFilled className="notification" />
           </Dropdown>
-          <BooksOfUserModal
-            showModal={modal}
-            userInfo={userInfo}
-            setShowModal={setModal}
-          ></BooksOfUserModal>
         </div>
       </div>
     </div>
