@@ -72,8 +72,8 @@ class API {
             }
         };
         this.endpoints['books'] = {
-            fetchNearbyBooks: () => {
-                var endpointUrl = this.url + "/books/find";
+            fetchNearbyBooks: (distance) => {
+                var endpointUrl = this.url + "/books/find?distance="+distance;
                 return (
                     axios.get(endpointUrl, {})
                 )

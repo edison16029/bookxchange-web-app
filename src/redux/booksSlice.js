@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import API from '../shared/api';
+import constants from './../shared/constants'
 import handleApiError from '../shared/errorhandler';
 
 export const fetchBooks = createAsyncThunk(
     'books/fetchBooks',
     (data, ThunkAPI) => {
         const myApi = new API();
-        return myApi.endpoints.books.fetchNearbyBooks()
+        return myApi.endpoints.books.fetchNearbyBooks(constants.findBooksDistance)
         .then(response => {
             return response.data;
         })
@@ -30,7 +31,10 @@ const booksSlice = createSlice({
         removeLikedBook(state,action) {
             let index = state.data.nearbyBooks.findIndex(book => book.id === action.payload);
             state.data.nearbyBooks.splice(index, 1);
-        }
+        },
+        updateBooks(state, action){
+            state.data.nearbyBooks = action.payload;
+        },
     },
     extraReducers : {
         [fetchBooks.fulfilled] : (state, action) => {
@@ -46,5 +50,5 @@ const booksSlice = createSlice({
     }
 })
 
-export const { removeLikedBook } = booksSlice.actions;
+export const { removeLikedBook,updateBooks } = booksSlice.actions;
 export default booksSlice.reducer

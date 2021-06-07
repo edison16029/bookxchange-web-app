@@ -6,6 +6,7 @@ import  MatchedBooks  from './MatchedBooks';
 import { NavigationBar} from './presentationalComponents/NavigationBar';
 import Login from './Login';
 import Signup from './Signup';
+import ErrorView from './presentationalComponents/ErrorView';
 import constants from '../shared/constants';
 
 import '../styles/home.scss';
@@ -23,6 +24,7 @@ const Home = () => {
                             <Route exact path={constants.routes.profile} component = {Profile} />
                             <Route exact path={constants.routes.browseBooks} component = {BrowseBooks} />
                             <Route exact path={constants.routes.matchedBooks} component = {MatchedBooks} />
+                            <Route component={ErrorView} />
                         </Switch>
                     </div>
             </Router>

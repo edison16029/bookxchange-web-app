@@ -4,9 +4,7 @@ const ErrorView = props => {
 
     return(
         <div className = "error-view-container">
-            <div className = "error-book-bg">
-
-            </div>
+            <div className = "error-book-bg"/>
         </div>
     )
 }
